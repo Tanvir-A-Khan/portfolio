@@ -1,7 +1,8 @@
+import Image from "next/image";
 import Nav from "./components/Nav";
 import Reveal from "./components/Reveal";
 import ParsePanel from "./components/ParsePanel";
-import Avatar from "./components/Avatar";
+import LayerBars from "./components/LayerBars";
 import { profile, work, experience, stack, credentials } from "../data/site";
 
 export default function Page() {
@@ -16,7 +17,14 @@ export default function Page() {
             <div className="hero-grid">
               <div className="hero-avatar">
                 <div className="avatar-frame">
-                  <Avatar />
+                  <Image
+                    src="/avatar.png"
+                    alt={`Portrait of ${profile.name}`}
+                    fill
+                    sizes="(min-width: 1024px) 200px, 132px"
+                    style={{ objectFit: "cover" }}
+                    priority
+                  />
                 </div>
               </div>
 
@@ -28,6 +36,9 @@ export default function Page() {
                 <p className="hero-intro">{profile.intro}</p>
 
                 <div className="hero-links">
+                  <a className="pill pill-primary" href="/Tanvir_Ahmed_Khan_CV.docx" download>
+                    Download CV
+                  </a>
                   {profile.links.map((l) => (
                     <a
                       className="pill"
@@ -79,6 +90,7 @@ export default function Page() {
                         </li>
                       ))}
                     </ul>
+                    <LayerBars metrics={p.metrics} />
                   </div>
                 </article>
               </Reveal>
@@ -158,15 +170,30 @@ export default function Page() {
                 {profile.email}
               </a>
 
+              <a
+                className="pill pill-whatsapp"
+                href="https://wa.me/8801625090976"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Message on WhatsApp
+              </a>
+
               <div className="foot">
                 <span>
                   {profile.name} · {profile.location}
                 </span>
-                <span>
+                <span className="foot-links">
                   {profile.links
                     .filter((l) => l.href.startsWith("http"))
-                    .map((l) => l.label)
-                    .join(" / ")}
+                    .map((l, i, arr) => (
+                      <span key={l.label}>
+                        <a href={l.href} target="_blank" rel="noreferrer">
+                          {l.label}
+                        </a>
+                        {i < arr.length - 1 ? " / " : ""}
+                      </span>
+                    ))}
                 </span>
               </div>
             </Reveal>

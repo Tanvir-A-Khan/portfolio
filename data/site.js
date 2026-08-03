@@ -6,14 +6,15 @@ export const profile = {
   role: "Software Engineer",
   location: "Dhaka, Bangladesh",
   timezone: "UTC+6",
-  email: "mostlytanvir@gmail.com",
+  email: "tanvir.a.khan12@gmail.com",
   headline: "I build systems that pull clean data out of messy inputs.",
   intro:
     "Software engineer at Cognitus, an IBM company. Backend-leaning full-stack — Spring Boot and FastAPI on the server, React and React Native in front of it. Most of what I ship ends up being a parser, a verifier, or a pipeline that turns something unreliable into something you can trust.",
   links: [
     { label: "GitHub", href: "https://github.com/Tanvir-A-Khan" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/tanvir-a-khan" },
-    { label: "Email", href: "mailto:mostlytanvir@gmail.com" },
+    { label: "Email", href: "mailto:tanvir.a.khan12@gmail.com" },
+    { label: "WhatsApp", href: "https://wa.me/8801625090976" },
   ],
 };
 
@@ -43,6 +44,16 @@ export const work = [
       "Reads transaction SMS from bKash, Nagad, Rocket, Upay, DBBL and BRAC Bank and turns it into a real ledger. The parser runs in four layers — sender routing, then regex, then heuristics, and only then an LLM. Most messages never reach the model, which is the whole point: accuracy stays high and the API bill stays near zero.",
     role: "Solo",
     href: null,
+    // Placeholder split — swap in your real per-layer resolution numbers.
+    metrics: {
+      label: "Messages resolved per layer",
+      data: [
+        { label: "Sender routing", value: 42 },
+        { label: "Regex", value: 35 },
+        { label: "Heuristics", value: 17 },
+        { label: "LLM fallback", value: 6, flag: true },
+      ],
+    },
   },
   {
     name: "Jachai",
