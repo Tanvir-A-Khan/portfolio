@@ -14,7 +14,7 @@ export default function Nav() {
     <nav className="nav">
       <div className="shell nav-inner">
         <a href="#top" className="nav-mark">
-          {profile.initials}
+          {profile.shortName}
         </a>
 
         <div className="nav-links">

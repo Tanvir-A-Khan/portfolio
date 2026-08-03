@@ -5,7 +5,7 @@ export default function LayerBars({ metrics }) {
     <div className="layer-bars">
       <p className="layer-bars-label">{metrics.label}</p>
       {metrics.data.map((row) => (
-        <div className={`layer-bar${row.flag ? " is-flagged" : ""}`} key={row.label}>
+        <div className="layer-bar" key={row.label}>
           <span className="layer-bar-label">{row.label}</span>
           <span className="layer-bar-track">
             <span className="layer-bar-fill" style={{ width: `${row.value}%` }} />

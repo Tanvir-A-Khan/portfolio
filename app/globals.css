@@ -8,6 +8,7 @@
   --paper: #e9e7e2;
   --muted: #8a9199;
   --mark: #f5d547;
+  --mark-text: #f5d547;
   --verify: #4d9d8b;
   --line: rgba(233, 231, 226, 0.12);
   --line-strong: rgba(233, 231, 226, 0.24);
@@ -28,6 +29,7 @@
   --paper: #14181b;
   --muted: #5f676e;
   --mark: #ffd400;
+  --mark-text: #8a6a00;
   --verify: #1f7563;
   --line: rgba(20, 24, 27, 0.14);
   --line-strong: rgba(20, 24, 27, 0.28);
@@ -195,6 +197,16 @@ a {
 
 .hero-avatar {
   justify-self: center;
+  text-align: center;
+}
+
+.avatar-name {
+  margin: 0.85rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .avatar-frame {
@@ -436,6 +448,7 @@ a {
 }
 
 .tag {
+  display: inline-block;
   font-family: var(--mono);
   font-size: 0.6875rem;
   letter-spacing: 0.04em;
@@ -443,10 +456,20 @@ a {
   border: 1px solid var(--line);
   border-radius: 4px;
   padding: 0.2rem 0.5rem;
+  cursor: default;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.tag:hover {
+  color: #10141a;
+  background: var(--mark);
+  border-color: var(--mark);
+  transform: translateY(-2px) scale(1.05);
 }
 
 .row:hover .row-name {
-  color: var(--mark);
+  color: var(--mark-text);
 }
 
 .row-name {
@@ -500,10 +523,6 @@ a {
   background: var(--verify);
   transform-origin: left;
   animation: bar-in 0.7s ease backwards;
-}
-
-.layer-bar.is-flagged .layer-bar-fill {
-  background: var(--mark);
 }
 
 .layer-bar-value {
@@ -578,6 +597,24 @@ a {
   line-height: 1.9;
 }
 
+.stack-list li {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  padding: 0 0.4rem;
+  margin: 0 -0.4rem;
+  border-radius: 4px;
+  cursor: default;
+  transform-origin: left center;
+  transition: color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+.stack-list li:hover {
+  color: var(--mark-text);
+  background-color: rgba(245, 213, 71, 0.1);
+  transform: scale(1.16);
+}
+
 /* ---- Credentials ---- */
 .creds {
   margin: 2.25rem 0 0;
@@ -625,7 +662,7 @@ a {
 }
 
 .contact-mail:hover {
-  color: var(--mark);
+  color: var(--mark-text);
 }
 
 .pill-whatsapp {
@@ -809,7 +846,9 @@ a {
   .field,
   .reveal,
   .avatar-frame,
-  .layer-bar-fill {
+  .layer-bar-fill,
+  .stack-list li,
+  .tag {
     animation: none !important;
     transition: none !important;
     opacity: 1 !important;

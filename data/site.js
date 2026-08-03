@@ -2,14 +2,14 @@
 
 export const profile = {
   name: "Tanvir Ahmed Khan",
-  initials: "TAK",
+  shortName: "Tanvir AK",
   role: "Software Engineer",
   location: "Dhaka, Bangladesh",
   timezone: "UTC+6",
   email: "tanvir.a.khan12@gmail.com",
-  headline: "I build systems that pull clean data out of messy inputs.",
+  headline: "Software engineer who ships things start to finish.",
   intro:
-    "Software engineer at Cognitus, an IBM company. Backend-leaning full-stack — Spring Boot and FastAPI on the server, React and React Native in front of it. Most of what I ship ends up being a parser, a verifier, or a pipeline that turns something unreliable into something you can trust.",
+    "Software engineer at Cognitus, an IBM company. Mostly React and React Native on the front end — I pick up Node.js for the backend when a project needs it, though that's not where I spend most of my time. Comfortable in any language a project calls for. I like being the one who takes a feature from a rough idea to something people actually use.",
   links: [
     { label: "GitHub", href: "https://github.com/Tanvir-A-Khan" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/tanvir-a-khan" },
@@ -37,8 +37,8 @@ export const parseDemo = {
 export const work = [
   {
     name: "Takafy",
-    tagline: "AI personal finance assistant for Bangladeshi mobile money",
-    year: "2026",
+    tagline: "Personal finance assistant for Bangladeshi mobile money",
+    year: "In progress",
     stack: ["React Native", "Expo", "FastAPI", "Supabase", "Gemini", "Groq"],
     body:
       "Reads transaction SMS from bKash, Nagad, Rocket, Upay, DBBL and BRAC Bank and turns it into a real ledger. The parser runs in four layers — sender routing, then regex, then heuristics, and only then an LLM. Most messages never reach the model, which is the whole point: accuracy stays high and the API bill stays near zero.",
@@ -51,7 +51,7 @@ export const work = [
         { label: "Sender routing", value: 42 },
         { label: "Regex", value: 35 },
         { label: "Heuristics", value: 17 },
-        { label: "LLM fallback", value: 6, flag: true },
+        { label: "LLM fallback", value: 6 },
       ],
     },
   },

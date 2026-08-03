@@ -26,6 +26,7 @@ export default function Page() {
                     priority
                   />
                 </div>
+                <p className="avatar-name">{profile.name}</p>
               </div>
 
               <div>
