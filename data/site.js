@@ -120,8 +120,8 @@ export const experience = [
 
 export const stack = [
   { group: "Languages", items: ["Java", "Python", "JavaScript", "TypeScript", "SQL"] },
-  { group: "Server", items: ["Spring Boot", "FastAPI", "Node.js", "SQLAlchemy", "Alembic"] },
   { group: "Client", items: ["React", "Next.js", "React Native", "Expo", "Zustand"] },
+  { group: "Server", items: ["Spring Boot", "FastAPI", "Node.js", "SQLAlchemy", "Alembic"] },
   { group: "Data", items: ["PostgreSQL", "MongoDB", "MySQL", "Supabase"] },
   { group: "Everything else", items: ["Git", "Cloudinary", "Godot 4", "Ollama", "Play Console"] },
 ];

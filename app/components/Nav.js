@@ -3,8 +3,16 @@
 import { useEffect, useState } from "react";
 import { profile } from "../../data/site";
 
+const SECTIONS = [
+  { href: "#work", label: "Work" },
+  { href: "#experience", label: "Experience" },
+  { href: "#stack", label: "Stack" },
+  { href: "#contact", label: "Contact" },
+];
+
 export default function Nav() {
   const [theme, setTheme] = useState("dark");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -18,10 +26,11 @@ export default function Nav() {
         </a>
 
         <div className="nav-links">
-          <a href="#work">Work</a>
-          <a href="#experience">Experience</a>
-          <a href="#stack">Stack</a>
-          <a href="#contact">Contact</a>
+          {SECTIONS.map((s) => (
+            <a key={s.href} href={s.href}>
+              {s.label}
+            </a>
+          ))}
         </div>
 
         <div className="nav-right">
@@ -37,8 +46,27 @@ export default function Nav() {
           >
             {theme === "dark" ? "Light" : "Dark"}
           </button>
+          <button
+            type="button"
+            className="menu-btn"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? "Close" : "Menu"}
+          </button>
         </div>
       </div>
+
+      {menuOpen && (
+        <div className="mobile-menu">
+          {SECTIONS.map((s) => (
+            <a key={s.href} href={s.href} onClick={() => setMenuOpen(false)}>
+              {s.label}
+            </a>
+          ))}
+        </div>
+      )}
     </nav>
   );
 }
