@@ -1,4 +1,5 @@
 import "./globals.css";
+import Preloader from "./components/Preloader";
 import { profile } from "../data/site";
 
 export const metadata = {
@@ -14,7 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="dark">
-      <head>
+      <head suppressHydrationWarning>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -22,7 +23,13 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <noscript>
+          <style>{`.preloader { display: none !important; }`}</style>
+        </noscript>
+        <Preloader />
+        {children}
+      </body>
     </html>
   );
 }

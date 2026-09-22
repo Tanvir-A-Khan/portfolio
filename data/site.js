@@ -7,6 +7,8 @@ export const profile = {
   location: "Dhaka, Bangladesh",
   timezone: "UTC+6",
   email: "tanvir.a.khan12@gmail.com",
+  sinceYear: 2024,
+  currentlyBuilding: "Takafy",
   headline: "Software engineer who ships things start to finish.",
   intro:
     "Software engineer at Cognitus, an IBM company. Mostly React and React Native on the front end — I pick up Node.js for the backend when a project needs it, though that's not where I spend most of my time. Comfortable in any language a project calls for. I like being the one who takes a feature from a rough idea to something people actually use.",
@@ -94,6 +96,7 @@ export const experience = [
     title: "Software Engineer",
     period: "Dec 2024 — Present",
     place: "Remote · Dallas, TX",
+    relatedWork: null,
   },
   {
     org: "T-Tech",
@@ -101,6 +104,7 @@ export const experience = [
     title: "Founder & Engineer",
     period: "2024 — Present",
     place: "Gazipur, BD",
+    relatedWork: "Takafy",
   },
   {
     org: "Kaz Software",
@@ -108,6 +112,7 @@ export const experience = [
     title: "Associate Software Engineer",
     period: "Jun 2024 — Feb 2025",
     place: "Dhaka, BD",
+    relatedWork: null,
   },
   {
     org: "Rokomari.com",
@@ -115,6 +120,7 @@ export const experience = [
     title: "Software Engineer Intern",
     period: "Jan 2024 — May 2024",
     place: "Dhaka, BD",
+    relatedWork: "Jachai",
   },
 ];
 
@@ -125,6 +131,9 @@ export const stack = [
   { group: "Data", items: ["PostgreSQL", "MongoDB", "MySQL", "Supabase"] },
   { group: "Everything else", items: ["Git", "Cloudinary", "Godot 4", "Ollama", "Play Console"] },
 ];
+
+// Daily drivers — marked in the UI so the stack list reads as "core vs. dabbled".
+export const coreStack = ["React", "React Native", "Next.js", "JavaScript", "TypeScript", "Node.js"];
 
 export const credentials = [
   "ICPC Regionalist",

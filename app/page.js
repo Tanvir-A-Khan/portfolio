@@ -3,9 +3,19 @@ import Nav from "./components/Nav";
 import Reveal from "./components/Reveal";
 import ParsePanel from "./components/ParsePanel";
 import LayerBars from "./components/LayerBars";
-import { profile, work, experience, stack, credentials } from "../data/site";
+import StatCounter from "./components/StatCounter";
+import { profile, work, experience, stack, coreStack, credentials } from "../data/site";
+
+function slugify(str) {
+  return str
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
 
 export default function Page() {
+  const yearsShipping = new Date().getFullYear() - profile.sinceYear;
+
   return (
     <>
       <Nav />
@@ -13,6 +23,7 @@ export default function Page() {
       <main id="top">
         {/* ---------- Hero ---------- */}
         <header className="hero">
+          <div className="hero-blob" aria-hidden="true" />
           <div className="shell">
             <div className="hero-grid">
               <div className="hero-avatar">
@@ -36,6 +47,14 @@ export default function Page() {
                 <h1 className="hero-h1">{profile.headline}</h1>
                 <p className="hero-intro">{profile.intro}</p>
 
+                <p className="hero-status">
+                  <span className="status-dot" aria-hidden="true" />
+                  Currently building{" "}
+                  <a href={`#work-${slugify(profile.currentlyBuilding)}`}>
+                    {profile.currentlyBuilding}
+                  </a>
+                </p>
+
                 <div className="hero-links">
                   <a className="pill pill-primary" href="/Tanvir_Ahmed_Khan_CV.docx" download>
                     Download CV
@@ -52,6 +71,13 @@ export default function Page() {
                     </a>
                   ))}
                 </div>
+
+                <div className="hero-stats">
+                  <StatCounter value={yearsShipping} suffix="+" label="Years shipping code" />
+                  <StatCounter value={work.length} label="Projects shipped" />
+                  <StatCounter value={experience.length} label="Teams worked with" />
+                  <StatCounter value={credentials.length} label="Awards & credentials" />
+                </div>
               </div>
             </div>
 
@@ -63,7 +89,7 @@ export default function Page() {
         <section className="section" id="work">
           <div className="shell">
             <Reveal>
-              <p className="eyebrow">Selected work</p>
+              <p className="eyebrow">01 — Selected work</p>
               <h2 className="section-h2">
                 Four things I built, and what was actually hard about each.
               </h2>
@@ -71,9 +97,10 @@ export default function Page() {
 
             {work.map((p, i) => (
               <Reveal key={p.name} delay={i * 60}>
-                <article className="row">
+                <article className="row" id={`work-${slugify(p.name)}`}>
                   <div>
                     <div className="row-meta">
+                      <span className="row-index">{String(i + 1).padStart(2, "0")}</span>
                       <span>{p.year}</span>
                       <span>·</span>
                       <span>{p.role}</span>
@@ -103,19 +130,30 @@ export default function Page() {
         <section className="section" id="experience">
           <div className="shell">
             <Reveal>
-              <p className="eyebrow">Experience</p>
+              <p className="eyebrow">02 — Experience</p>
               <h2 className="section-h2">Where I&rsquo;ve done it.</h2>
             </Reveal>
 
             {experience.map((j, i) => (
               <Reveal key={j.org + j.period} delay={i * 50}>
                 <div className="job">
+                  <span className="job-index">{String(i + 1).padStart(2, "0")}</span>
                   <div>
-                    <p className="job-title">{j.title}</p>
+                    <p className="job-title">
+                      {j.title}
+                      {j.period.includes("Present") && (
+                        <span className="job-current">Current</span>
+                      )}
+                    </p>
                     <span className="job-org">
                       {j.org}
                       {j.note ? `, ${j.note}` : ""}
                     </span>
+                    {j.relatedWork && (
+                      <a className="job-link" href={`#work-${slugify(j.relatedWork)}`}>
+                        → {j.relatedWork}
+                      </a>
+                    )}
                   </div>
                   <span className="job-when">
                     {j.period} · {j.place}
@@ -138,18 +176,26 @@ export default function Page() {
         <section className="section" id="stack">
           <div className="shell">
             <Reveal>
-              <p className="eyebrow">Stack</p>
+              <p className="eyebrow">03 — Stack</p>
               <h2 className="section-h2">What I reach for.</h2>
+              <p className="stack-hint">
+                <span className="stack-hint-dot" aria-hidden="true" /> marks a daily driver
+              </p>
             </Reveal>
 
             <Reveal>
               <div className="stack-grid">
                 {stack.map((g) => (
                   <div key={g.group}>
-                    <h3 className="stack-group-h">{g.group}</h3>
+                    <h3 className="stack-group-h">
+                      {g.group}
+                      <span className="stack-count">{g.items.length}</span>
+                    </h3>
                     <ul className="stack-list">
                       {g.items.map((it) => (
-                        <li key={it}>{it}</li>
+                        <li key={it} className={coreStack.includes(it) ? "is-core" : undefined}>
+                          {it}
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -163,7 +209,7 @@ export default function Page() {
         <section className="contact" id="contact">
           <div className="shell">
             <Reveal>
-              <p className="eyebrow">Contact</p>
+              <p className="eyebrow">04 — Contact</p>
               <h2 className="section-h2" style={{ marginBottom: "1.75rem" }}>
                 Got something that needs building? Say what it is.
               </h2>

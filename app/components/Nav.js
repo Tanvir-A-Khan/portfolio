@@ -4,19 +4,29 @@ import { useEffect, useState } from "react";
 import { profile } from "../../data/site";
 
 const SECTIONS = [
-  { href: "#work", label: "Work" },
-  { href: "#experience", label: "Experience" },
-  { href: "#stack", label: "Stack" },
-  { href: "#contact", label: "Contact" },
+  { href: "#work", label: "Work", num: "01" },
+  { href: "#experience", label: "Experience", num: "02" },
+  { href: "#stack", label: "Stack", num: "03" },
+  { href: "#contact", label: "Contact", num: "04" },
 ];
 
 export default function Nav() {
   const [theme, setTheme] = useState("dark");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [now, setNow] = useState(null);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    const tick = () => setNow(new Date());
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const timeStr = now ? now.toLocaleTimeString("en-GB", { hour12: false }) : "--:--:--";
 
   return (
     <nav className="nav">
@@ -28,6 +38,7 @@ export default function Nav() {
         <div className="nav-links">
           {SECTIONS.map((s) => (
             <a key={s.href} href={s.href}>
+              <span className="nav-num">{s.num}</span>
               {s.label}
             </a>
           ))}
@@ -36,8 +47,11 @@ export default function Nav() {
         <div className="nav-right">
           <span className="status">
             <span className="status-dot" aria-hidden="true" />
-            {profile.location} · {profile.timezone}
+            {profile.location} · {profile.timezone} · {timeStr}
           </span>
+          <a className="theme-btn nav-cv" href="/Tanvir_Ahmed_Khan_CV.docx" download>
+            CV
+          </a>
           <button
             type="button"
             className="theme-btn"
@@ -62,7 +76,7 @@ export default function Nav() {
         <div className="mobile-menu">
           {SECTIONS.map((s) => (
             <a key={s.href} href={s.href} onClick={() => setMenuOpen(false)}>
-              {s.label}
+              <span className="nav-num">{s.num}</span> {s.label}
             </a>
           ))}
         </div>
