@@ -40,6 +40,7 @@ export default function WorkPreviewList({ projects }) {
         {cover && (
           <div className="relative mb-5 overflow-hidden rounded-xl border border-(--line)">
             <Image
+              key={cover.src}
               src={cover.src}
               alt={`${active.name} — ${cover.caption}`}
               width={480}

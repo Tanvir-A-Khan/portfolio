@@ -101,19 +101,25 @@
 }
 
 /* ============================================================
-   Hover accordion: only one Experience row open at a time.
-   Kept as plain CSS — expressing ":has(sibling:hover) &:not(:hover)"
-   across an arbitrary number of siblings isn't something Tailwind's
-   group-has-* variant can do cleanly on its own.
+   Experience accordion on touch devices: there's no hover to drive
+   the open/close state (ExperienceAccordion.js uses mousemove, which
+   touch doesn't fire), so show every row's detail expanded instead
+   of leaving all but the first permanently collapsed.
    ============================================================ */
-.job-list:has(.job:hover) .job-open:not(:hover) .job-detail-wrap {
-  grid-template-rows: 0fr;
+@media (hover: none) {
+  .job-detail-wrap {
+    grid-template-rows: 1fr !important;
+  }
+
+  .job-expand-icon {
+    transform: rotate(45deg) !important;
+  }
 }
 
-.job-list:has(.job:hover) .job-open:not(:hover) .job-expand-icon {
-  transform: translateY(-50%);
-  color: var(--muted);
-  opacity: 0.6;
+@media (hover: none) and (min-width: 1024px) {
+  .job-expand-icon {
+    transform: translateY(-50%) rotate(45deg) !important;
+  }
 }
 
 /* ============================================================
