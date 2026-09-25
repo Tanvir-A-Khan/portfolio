@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { profile } from "../../data/site";
 
 const SECTIONS = [
-  { href: "#work", label: "Work", num: "01" },
-  { href: "#experience", label: "Experience", num: "02" },
-  { href: "#stack", label: "Stack", num: "03" },
-  { href: "#contact", label: "Contact", num: "04" },
+  { href: "/#work", label: "Work", num: "01" },
+  { href: "/#experience", label: "Experience", num: "02" },
+  { href: "/#stack", label: "Stack", num: "03" },
+  { href: "/#contact", label: "Contact", num: "04" },
 ];
 
 export default function Nav() {
@@ -31,7 +31,7 @@ export default function Nav() {
   return (
     <nav className="nav">
       <div className="shell nav-inner">
-        <a href="#top" className="nav-mark">
+        <a href="/#top" className="nav-mark">
           {profile.shortName}
         </a>
 

@@ -8,10 +8,10 @@ export const profile = {
   timezone: "UTC+6",
   email: "tanvir.a.khan12@gmail.com",
   sinceYear: 2024,
-  currentlyBuilding: "Takafy",
-  headline: "Software engineer who ships things start to finish.",
+  currentlyBuilding: "Traffic Rush Dhaka",
+  headline: "Three years shipping enterprise software, and my own products alongside it.",
   intro:
-    "Software engineer at Cognitus, an IBM company. Mostly React and React Native on the front end — I pick up Node.js for the backend when a project needs it, though that's not where I spend most of my time. Comfortable in any language a project calls for. I like being the one who takes a feature from a rough idea to something people actually use.",
+    "I'm Tanvir Ahmed Khan — a software engineer building contract-management software at IBM, full-stack across React, TypeScript and Node.js, with backend depth in Java/Spring Boot and Python/FastAPI elsewhere, and mobile apps I design, build and release myself.",
   links: [
     { label: "GitHub", href: "https://github.com/Tanvir-A-Khan" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/tanvir-a-khan" },
@@ -20,91 +20,102 @@ export const profile = {
   ],
 };
 
-// The hero demo. A representative mobile-money SMS and the fields a parser lifts out of it.
-export const parseDemo = {
-  raw: "You have received Tk 2,500.00 from 01712345678. Fee Tk 0.00. Balance Tk 7,310.50. TrxID BJH7X2K9QP at 12/07/2026 14:22",
-  // `mark` values must appear verbatim in `raw` — they get the highlighter treatment.
-  marks: ["2,500.00", "01712345678", "7,310.50", "BJH7X2K9QP"],
-  source: "Takafy",
-  fields: [
-    { key: "direction", value: "credit" },
-    { key: "amount", value: "2500.00 BDT" },
-    { key: "counterparty", value: "01712345678" },
-    { key: "balance_after", value: "7310.50 BDT" },
-    { key: "trx_id", value: "BJH7X2K9QP" },
-    { key: "resolved_by", value: "regex — layer 2 of 4" },
-  ],
-};
-
 export const work = [
   {
-    name: "Takafy",
-    tagline: "Personal finance assistant for Bangladeshi mobile money",
-    year: "In progress",
-    stack: ["React Native", "Expo", "FastAPI", "Supabase", "Gemini", "Groq"],
+    name: "LambdaX",
+    platform: "web",
+    tagline: "Enterprise contract-management platform, at Cognitus and now IBM",
+    year: "In production",
+    stack: ["React", "TypeScript", "Node.js", "Google Calendar API"],
     body:
-      "Reads transaction SMS from bKash, Nagad, Rocket, Upay, DBBL and BRAC Bank and turns it into a real ledger. The parser runs in four layers — sender routing, then regex, then heuristics, and only then an LLM. Most messages never reach the model, which is the whole point: accuracy stays high and the API bill stays near zero.",
-    role: "Solo",
+      "An enterprise agreement and contract management platform. I work across the stack on the lax-web-portal codebase — first at Cognitus, now at IBM — building the contract editor, calendar sync, in-app notifications and an activity/audit logger.",
+    role: "Full-stack",
     href: null,
-    // Placeholder split — swap in your real per-layer resolution numbers.
-    metrics: {
-      label: "Messages resolved per layer",
-      data: [
-        { label: "Sender routing", value: 42 },
-        { label: "Regex", value: 35 },
-        { label: "Heuristics", value: 17 },
-        { label: "LLM fallback", value: 6 },
-      ],
-    },
+    screenshots: [
+      { src: "/Lax/lax1.png", caption: "Calendar module" },
+      { src: "/Lax/lax2.png", caption: "Task board" },
+      { src: "/Lax/lax3.png", caption: "Contract editor" },
+    ],
+  },
+  {
+    name: "MaafCraft",
+    platform: "web",
+    tagline: "First full-stack e-commerce platform, start to production",
+    year: "2023",
+    stack: ["Next.js", "TypeScript", "Spring Boot", "MongoDB", "Cloudinary"],
+    body:
+      "A full-stack e-commerce platform, independently designed, built and deployed — backend services, storefront, data model and production hosting. Every uploaded product image gets watermarked automatically before storage, so sellers never have to think about it.",
+    role: "Solo",
+    href: "https://maafcraft.com",
+  },
+  {
+    name: "Tax Research Platform",
+    platform: "web",
+    tagline: "Tax research platform for a Netherlands-based client, built at Kaz Software",
+    year: "2024 — 2025",
+    stack: ["Angular", "Spring Boot", "Hibernate", "MySQL"],
+    body:
+      "Features for a Tax Research Platform serving a Netherlands-based client, focused on scalable data handling, visualization and reporting. Angular frontend against a Java Spring Boot and Hibernate backend on MySQL, with sprint tracking in Jira, feature design input, peer review and defect triage.",
+    role: "Frontend",
+    href: "https://www.ibfd.org/tax-research-platform",
+    screenshots: [{ src: "/kaz/tax-research-platform.png", caption: "Tax Research Platform" }],
   },
   {
     name: "Jachai",
+    platform: "web",
     tagline: "QR book authenticity verification, built at Rokomari.com",
     year: "2024",
-    stack: ["Spring Boot", "Next.js", "MongoDB"],
+    stack: ["Spring Boot", "Hibernate", "Next.js", "TypeScript"],
     body:
-      "Counterfeit reprints are a real problem for Bangladeshi publishers. Jachai gives every genuine copy a QR code a buyer can scan to confirm it. I built the generation and lookup services and the customer-facing verification flow.",
+      "A QR-code book authenticity verification platform for Rokomari, Bangladesh's largest online bookstore — customers scan to confirm a copy is genuine rather than a counterfeit reprint. I built the generation and lookup services and the customer-facing verification flow.",
     role: "Full-stack",
     href: null,
   },
   {
-    name: "MaafCraft",
-    tagline: "First full-stack e-commerce platform, start to production",
-    year: "2023",
-    stack: ["Spring Boot", "Next.js", "MongoDB", "Cloudinary"],
+    name: "Tasbeeh Noor",
+    platform: "mobile",
+    tagline: "Digital prayer bead counter, published on Google Play",
+    year: "Published",
+    stack: ["React Native", "Expo", "Play Console"],
     body:
-      "Data model, backend, storefront, and the VPS it runs on — all mine. The piece I'm still proud of is the upload service: every product image gets watermarked automatically on the way to storage, so sellers never have to think about it.",
+      "A digital prayer bead counter, published on Google Play under my own developer account — designed, built and taken through the full release pipeline.",
     role: "Solo",
     href: null,
   },
   {
     name: "Traffic Rush Dhaka",
+    platform: "mobile",
     tagline: "2D arcade game about the commute everyone here knows",
     year: "In progress",
-    stack: ["Godot 4", "GDScript"],
+    stack: ["Godot 4", "GDScript", "Play Console"],
     body:
-      "A break from CRUD. Gameplay loop, art pipeline, and the Play Console release track under my own developer account.",
+      "An endless lane-dodging arcade game themed on Dhaka traffic — the core gameplay loop, the art pipeline, and the Play Console release track under my own developer account.",
     role: "Solo",
     href: null,
   },
 ];
 
+// Ordered most-recent first.
 export const experience = [
   {
-    org: "Cognitus",
-    note: "an IBM company",
-    title: "Software Engineer",
-    period: "Dec 2024 — Present",
+    org: "IBM",
+    note: null,
+    title: "Junior Software Engineer",
+    period: "2026 — Present",
     place: "Remote · Dallas, TX",
-    relatedWork: null,
+    detail:
+      "The same full-stack role on LambdaX, continued under a new name after Cognitus was acquired by IBM. React and TypeScript on the frontend, Node.js on the backend, building out the contract editor, calendar sync and an activity/audit logger, alongside diagnosing and resolving production defects within a distributed cross-timezone team.",
+    relatedWork: ["LambdaX"],
   },
   {
-    org: "T-Tech",
-    note: "independent",
-    title: "Founder & Engineer",
-    period: "2024 — Present",
-    place: "Gazipur, BD",
-    relatedWork: "Takafy",
+    org: "Cognitus",
+    note: "acquired by IBM",
+    title: "Software Engineer",
+    period: "2024 — 2026",
+    place: "Remote · Dallas, TX",
+    detail:
+      "Features for LambdaX, an enterprise agreement and contract management platform, in the lax-web-portal frontend. Built a full calendar module with two-way Google Calendar sync for events, tasks and milestones, and an in-app notification system with deep links to specific agreements and one-click attachment download. Resolved critical production defects affecting platform stability for enterprise users.",
+    relatedWork: ["LambdaX"],
   },
   {
     org: "Kaz Software",
@@ -112,7 +123,9 @@ export const experience = [
     title: "Associate Software Engineer",
     period: "Jun 2024 — Feb 2025",
     place: "Dhaka, BD",
-    relatedWork: null,
+    detail:
+      "Features for a Tax Research Platform serving a Netherlands-based client, focused on scalable data handling, visualization and reporting. Angular frontend against a Java Spring Boot and Hibernate backend on MySQL, with sprint tracking in Jira, feature design input, peer review and defect triage.",
+    relatedWork: ["Tax Research Platform"],
   },
   {
     org: "Rokomari.com",
@@ -120,25 +133,64 @@ export const experience = [
     title: "Software Engineer Intern",
     period: "Jan 2024 — May 2024",
     place: "Dhaka, BD",
-    relatedWork: "Jachai",
+    detail:
+      "Built Jachai, a QR-code book authenticity verification platform for Bangladesh's largest online bookstore. QR generation and lookup endpoints in Spring Boot and Hibernate, customer-facing verification flow in Next.js and TypeScript, plus catalogue and order features against MongoDB and MySQL in a high-traffic production environment.",
+    relatedWork: ["Jachai"],
   },
 ];
 
 export const stack = [
-  { group: "Languages", items: ["Java", "Python", "JavaScript", "TypeScript", "SQL"] },
-  { group: "Client", items: ["React", "Next.js", "React Native", "Expo", "Zustand"] },
-  { group: "Server", items: ["Spring Boot", "FastAPI", "Node.js", "SQLAlchemy", "Alembic"] },
-  { group: "Data", items: ["PostgreSQL", "MongoDB", "MySQL", "Supabase"] },
-  { group: "Everything else", items: ["Git", "Cloudinary", "Godot 4", "Ollama", "Play Console"] },
+  {
+    group: "Frontend & Mobile",
+    items: [
+      { name: "React", note: "The core of my enterprise UI work — complex, interactive interfaces that large teams maintain." },
+      { name: "TypeScript", note: "Type safety across large frontend codebases, where component contracts matter more than speed of writing." },
+      { name: "Next.js", note: "App structure, routing and rendering for production web products like MaafCraft and Jachai." },
+      { name: "React Native", note: "Cross-platform mobile apps in Expo — Tasbeeh Noor, built and released end to end." },
+      { name: "Angular", note: "Frontend for the Tax Research Platform at Kaz Software." },
+    ],
+  },
+  {
+    group: "Backend",
+    items: [
+      { name: "Java", note: "The language behind most of my backend work — Spring Boot services at Rokomari and Kaz Software." },
+      { name: "Spring Boot", note: "REST services, Hibernate data models and API design for e-commerce and enterprise platforms." },
+      { name: "Python", note: "FastAPI services for my own products, plus parsing pipelines and scripting." },
+      { name: "FastAPI", note: "Backend services with SQLAlchemy models and Alembic-managed migrations." },
+      { name: "Node.js", note: "Backend services for LambdaX at IBM — the part of the stack that made the role full-stack." },
+    ],
+  },
+  {
+    group: "Data & AI",
+    items: [
+      { name: "PostgreSQL", note: "Relational data on Supabase where integrity and query power matter." },
+      { name: "MongoDB", note: "Document modelling for e-commerce and catalogue-driven products." },
+      { name: "MySQL", note: "Relational work behind Spring Boot and Hibernate services." },
+      { name: "LLM integration", note: "Gemini and Groq/Llama with multi-provider fallback, so cost and availability are both controlled." },
+    ],
+  },
+  {
+    group: "Tools & Delivery",
+    items: [
+      { name: "Git / GitLab", note: "Branching, reviews, and the day-to-day discipline of a shared team codebase." },
+      { name: "Play Console", note: "Release signing, store listings and review — Tasbeeh Noor is live under my own developer account." },
+      { name: "Vercel", note: "Deploying and previewing frontend applications continuously." },
+      { name: "Cloudinary", note: "Media pipeline, watermarking and image delivery off the application server." },
+      { name: "Jira / Agile", note: "Sprint planning, triage and the reporting side of delivery." },
+    ],
+  },
 ];
 
 // Daily drivers — marked in the UI so the stack list reads as "core vs. dabbled".
-export const coreStack = ["React", "React Native", "Next.js", "JavaScript", "TypeScript", "Node.js"];
+export const coreStack = ["React", "TypeScript", "Next.js", "React Native", "Node.js"];
 
 export const credentials = [
-  "ICPC Regionalist",
-  "Microsoft Learn Student Ambassador (Beta)",
+  "ICPC Asia Dhaka Regional Finalist & Team Lead",
+  "1,200+ problems solved on Codeforces & CodeChef",
+  "Champion — BUET CSE FEST '23 Hackathon",
   "Champion — IUBAT Hult Prize, Campus Round",
-  "Champion — IT Olympiad",
+  "Champion — IUBAT IT Olympiad",
+  "Microsoft Learn Student Ambassador (Beta)",
+  "Lead Programmer, IUBAT Innovation & Entrepreneurship Center — ran Arduino/Raspberry Pi workshops",
   "BCSE Computer Engineering, IUBAT (2020–2024)",
 ];

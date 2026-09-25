@@ -1,19 +1,15 @@
 import Image from "next/image";
 import Nav from "./components/Nav";
 import Reveal from "./components/Reveal";
-import ParsePanel from "./components/ParsePanel";
-import LayerBars from "./components/LayerBars";
 import StatCounter from "./components/StatCounter";
+import WorkPreviewList from "./components/WorkPreviewList";
 import { profile, work, experience, stack, coreStack, credentials } from "../data/site";
-
-function slugify(str) {
-  return str
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
+import { slugify } from "../lib/slug";
 
 export default function Page() {
+  const webWork = work.filter((p) => p.platform === "web");
+  const mobileWork = work.filter((p) => p.platform === "mobile");
+
   const yearsShipping = new Date().getFullYear() - profile.sinceYear;
 
   return (
@@ -23,28 +19,28 @@ export default function Page() {
       <main id="top">
         {/* ---------- Hero ---------- */}
         <header className="hero">
-          <div className="hero-blob" aria-hidden="true" />
           <div className="shell">
             <div className="hero-grid">
-              <div className="hero-avatar">
-                <div className="avatar-frame">
-                  <Image
-                    src="/avatar.png"
-                    alt={`Portrait of ${profile.name}`}
-                    fill
-                    sizes="(min-width: 1024px) 200px, 132px"
-                    style={{ objectFit: "cover" }}
-                    priority
-                  />
-                </div>
-                <p className="avatar-name">{profile.name}</p>
-              </div>
-
               <div>
                 <p className="eyebrow">
                   {profile.role} · {profile.location}
                 </p>
                 <h1 className="hero-h1">{profile.headline}</h1>
+
+                <div className="hero-avatar">
+                  <div className="avatar-frame">
+                    <Image
+                      src="/avatar.png"
+                      alt={`Portrait of ${profile.name}`}
+                      fill
+                      sizes="(min-width: 1024px) 240px, 160px"
+                      style={{ objectFit: "cover" }}
+                      priority
+                    />
+                  </div>
+                  <p className="avatar-name">{profile.name}</p>
+                </div>
+
                 <p className="hero-intro">{profile.intro}</p>
 
                 <p className="hero-status">
@@ -80,8 +76,6 @@ export default function Page() {
                 </div>
               </div>
             </div>
-
-            <ParsePanel />
           </div>
         </header>
 
@@ -91,38 +85,23 @@ export default function Page() {
             <Reveal>
               <p className="eyebrow">01 — Selected work</p>
               <h2 className="section-h2">
-                Four things I built, and what was actually hard about each.
+                Things I built, and what was actually hard about each.
               </h2>
             </Reveal>
 
-            {work.map((p, i) => (
-              <Reveal key={p.name} delay={i * 60}>
-                <article className="row" id={`work-${slugify(p.name)}`}>
-                  <div>
-                    <div className="row-meta">
-                      <span className="row-index">{String(i + 1).padStart(2, "0")}</span>
-                      <span>{p.year}</span>
-                      <span>·</span>
-                      <span>{p.role}</span>
-                    </div>
-                    <h3 className="row-name">{p.name}</h3>
-                    <p className="row-tagline">{p.tagline}</p>
-                  </div>
+            <Reveal>
+              <div className="work-group">
+                <h3 className="work-group-h">Web pages</h3>
+                <WorkPreviewList projects={webWork} />
+              </div>
+            </Reveal>
 
-                  <div>
-                    <p className="row-body">{p.body}</p>
-                    <ul className="tags" style={{ marginTop: "1.1rem" }}>
-                      {p.stack.map((s) => (
-                        <li className="tag" key={s}>
-                          {s}
-                        </li>
-                      ))}
-                    </ul>
-                    <LayerBars metrics={p.metrics} />
-                  </div>
-                </article>
-              </Reveal>
-            ))}
+            <Reveal>
+              <div className="work-group">
+                <h3 className="work-group-h">Mobile apps</h3>
+                <WorkPreviewList projects={mobileWork} />
+              </div>
+            </Reveal>
           </div>
         </section>
 
@@ -134,33 +113,42 @@ export default function Page() {
               <h2 className="section-h2">Where I&rsquo;ve done it.</h2>
             </Reveal>
 
-            {experience.map((j, i) => (
-              <Reveal key={j.org + j.period} delay={i * 50}>
-                <div className="job">
+            <div className="job-list">
+              {experience.map((j, i) => (
+                <Reveal key={j.org + j.period} delay={i * 50}>
+                  <div className={i === 0 ? "job job-open" : "job"}>
+                    <span className="job-expand-icon" aria-hidden="true">
+                      +
+                    </span>
                   <span className="job-index">{String(i + 1).padStart(2, "0")}</span>
                   <div>
-                    <p className="job-title">
-                      {j.title}
+                    <p className="job-org-line">
+                      {j.org}
+                      {j.note ? `, ${j.note}` : ""}
                       {j.period.includes("Present") && (
                         <span className="job-current">Current</span>
                       )}
                     </p>
-                    <span className="job-org">
-                      {j.org}
-                      {j.note ? `, ${j.note}` : ""}
-                    </span>
-                    {j.relatedWork && (
-                      <a className="job-link" href={`#work-${slugify(j.relatedWork)}`}>
-                        → {j.relatedWork}
-                      </a>
-                    )}
+                    <span className="job-role">{j.title}</span>
+
+                    <div className="job-detail-wrap">
+                      <div className="job-detail-inner">
+                        {j.relatedWork?.map((w) => (
+                          <a key={w} className="job-link" href={`#work-${slugify(w)}`}>
+                            → {w}
+                          </a>
+                        ))}
+                        {j.detail && <p className="job-detail">{j.detail}</p>}
+                      </div>
+                    </div>
                   </div>
-                  <span className="job-when">
-                    {j.period} · {j.place}
-                  </span>
-                </div>
-              </Reveal>
-            ))}
+                    <span className="job-when">
+                      {j.period} · {j.place}
+                    </span>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
 
             <Reveal>
               <ul className="creds">
@@ -193,8 +181,12 @@ export default function Page() {
                     </h3>
                     <ul className="stack-list">
                       {g.items.map((it) => (
-                        <li key={it} className={coreStack.includes(it) ? "is-core" : undefined}>
-                          {it}
+                        <li
+                          key={it.name}
+                          className={coreStack.includes(it.name) ? "is-core" : undefined}
+                          title={it.note}
+                        >
+                          {it.name}
                         </li>
                       ))}
                     </ul>
