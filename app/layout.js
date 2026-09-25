@@ -49,7 +49,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
       </head>
-      <body className="m-0 font-[family-name:var(--font-body)] antialiased transition-colors duration-300 [&_.preloader]:motion-reduce:hidden">
+      <body className="m-0 font-(family-name:--font-body) antialiased transition-colors duration-300 [&_.preloader]:motion-reduce:hidden">
         <noscript>
           <style>{`.preloader { display: none !important; }`}</style>
         </noscript>

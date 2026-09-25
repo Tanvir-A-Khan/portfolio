@@ -37,28 +37,28 @@ export default async function ProjectPage({ params }) {
         <article className="relative py-20">
           <div className="mx-auto max-w-[1180px] px-6">
             <nav
-              className="mb-6 flex items-center gap-2 font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]"
+              className="mb-6 flex items-center gap-2 font-(family-name:--font-mono) text-xs text-(--muted)"
               aria-label="Breadcrumb"
             >
-              <Link className="hover:text-[var(--paper)]" href="/#work">
+              <Link className="hover:text-(--paper)" href="/#work">
                 Work
               </Link>
               <span aria-hidden="true">/</span>
               <span>{project.name}</span>
             </nav>
 
-            <p className="mb-3 font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
+            <p className="mb-3 font-(family-name:--font-mono) text-xs uppercase tracking-[0.14em] text-(--muted)">
               {project.year} · {project.role}
             </p>
-            <h1 className="mt-2 font-[family-name:var(--font-display)] text-[clamp(2rem,5vw,3.2rem)] font-semibold text-[var(--paper)]">
+            <h1 className="mt-2 font-(family-name:--font-display) text-[clamp(2rem,5vw,3.2rem)] font-semibold text-(--paper)">
               {project.name}
             </h1>
-            <p className="mt-2 text-lg text-[var(--mark)]">{project.tagline}</p>
+            <p className="mt-2 text-lg text-(--mark)">{project.tagline}</p>
 
             <ul className="mt-6 flex flex-wrap gap-2">
               {project.stack.map((s) => (
                 <li
-                  className="inline-flex items-center rounded-full border border-[var(--line)] bg-[var(--chip-bg)] px-3 py-1 font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]"
+                  className="inline-flex items-center rounded-full border border-(--line) bg-(--chip-bg) px-3 py-1 font-(family-name:--font-mono) text-xs text-(--muted)"
                   key={s}
                 >
                   {s}
@@ -66,12 +66,12 @@ export default async function ProjectPage({ params }) {
               ))}
             </ul>
 
-            <p className="mt-6 max-w-[70ch] leading-relaxed text-[var(--muted)]">{project.body}</p>
+            <p className="mt-6 max-w-[70ch] leading-relaxed text-(--muted)">{project.body}</p>
 
             <div className="mt-6 flex flex-wrap gap-4">
               {project.href && (
                 <a
-                  className="font-[family-name:var(--font-mono)] text-sm text-[var(--mark)] hover:underline"
+                  className="font-(family-name:--font-mono) text-sm text-(--mark) hover:underline"
                   href={project.href}
                   target="_blank"
                   rel="noreferrer"
@@ -88,22 +88,22 @@ export default async function ProjectPage({ params }) {
             )}
 
             {project.retro && (
-              <div className="mt-10 grid gap-8 border-t border-[var(--line)] pt-8 sm:grid-cols-2">
+              <div className="mt-10 grid gap-8 border-t border-(--line) pt-8 sm:grid-cols-2">
                 <div>
-                  <p className="mb-3 font-[family-name:var(--font-mono)] text-sm uppercase text-[var(--paper)]">
+                  <p className="mb-3 font-(family-name:--font-mono) text-sm uppercase text-(--paper)">
                     What went well
                   </p>
-                  <ul className="flex flex-col gap-2 text-sm leading-relaxed text-[var(--muted)]">
+                  <ul className="flex flex-col gap-2 text-sm leading-relaxed text-(--muted)">
                     {project.retro.wentWell.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <p className="mb-3 font-[family-name:var(--font-mono)] text-sm uppercase text-[var(--mark)]">
+                  <p className="mb-3 font-(family-name:--font-mono) text-sm uppercase text-(--mark)">
                     What I&rsquo;d change
                   </p>
-                  <ul className="flex flex-col gap-2 text-sm leading-relaxed text-[var(--muted)]">
+                  <ul className="flex flex-col gap-2 text-sm leading-relaxed text-(--muted)">
                     {project.retro.wouldChange.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
@@ -115,17 +115,17 @@ export default async function ProjectPage({ params }) {
             <div className="mt-12 grid gap-4 sm:grid-cols-2">
               <Link
                 href={`/work/${slugify(prev.name)}`}
-                className="block rounded-2xl border border-[var(--line)] bg-[var(--glass-bg)] p-5 transition-colors hover:bg-[var(--glass-hover)]"
+                className="block rounded-2xl border border-(--line) bg-(--glass-bg) p-5 transition-colors hover:bg-(--glass-hover)"
               >
-                <span className="font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]">← Previous</span>
-                <span className="mt-1 block font-medium text-[var(--paper)]">{prev.name}</span>
+                <span className="font-(family-name:--font-mono) text-xs text-(--muted)">← Previous</span>
+                <span className="mt-1 block font-medium text-(--paper)">{prev.name}</span>
               </Link>
               <Link
                 href={`/work/${slugify(next.name)}`}
-                className="block rounded-2xl border border-[var(--line)] bg-[var(--glass-bg)] p-5 text-right transition-colors hover:bg-[var(--glass-hover)]"
+                className="block rounded-2xl border border-(--line) bg-(--glass-bg) p-5 text-right transition-colors hover:bg-(--glass-hover)"
               >
-                <span className="font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]">Next →</span>
-                <span className="mt-1 block font-medium text-[var(--paper)]">{next.name}</span>
+                <span className="font-(family-name:--font-mono) text-xs text-(--muted)">Next →</span>
+                <span className="mt-1 block font-medium text-(--paper)">{next.name}</span>
               </Link>
             </div>
           </div>

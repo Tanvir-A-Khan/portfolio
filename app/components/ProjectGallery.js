@@ -33,9 +33,9 @@ export default function ProjectGallery({ images, projectName, variant = "side" }
                 src={shot.src}
                 alt={`${projectName} — ${shot.caption}`}
                 {...imgProps}
-                rootClassName="overflow-hidden rounded-xl border border-[var(--line)]"
+                rootClassName="overflow-hidden rounded-xl border border-(--line)"
               />
-              <span className="font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]">
+              <span className="font-(family-name:--font-mono) text-xs text-(--muted)">
                 {shot.caption}
               </span>
             </div>

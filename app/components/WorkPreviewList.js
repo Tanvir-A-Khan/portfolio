@@ -20,25 +20,25 @@ export default function WorkPreviewList({ projects }) {
             id={`work-${slugify(p.name)}`}
             className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition-colors ${
               i === activeIndex
-                ? "border-[var(--line)] bg-[var(--glass-bg)]"
-                : "border-transparent hover:bg-[var(--glass-hover)]"
+                ? "border-(--line) bg-(--glass-bg)"
+                : "border-transparent hover:bg-(--glass-hover)"
             }`}
             onMouseEnter={() => setActiveIndex(i)}
             onFocus={() => setActiveIndex(i)}
             onClick={() => setActiveIndex(i)}
           >
-            <span className="font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]">
+            <span className="font-(family-name:--font-mono) text-xs text-(--muted)">
               {String(i + 1).padStart(2, "0")}
             </span>
-            <span className="flex-1 text-sm text-[var(--paper)]">{p.name}</span>
-            <span className="font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]">{p.year}</span>
+            <span className="flex-1 text-sm text-(--paper)">{p.name}</span>
+            <span className="font-(family-name:--font-mono) text-xs text-(--muted)">{p.year}</span>
           </button>
         ))}
       </div>
 
-      <div className="relative min-h-[380px] rounded-2xl border border-[var(--line)] bg-[var(--glass-panel-bg)] p-6 shadow-[var(--shadow)] lg:min-h-[460px]">
+      <div className="relative min-h-[380px] rounded-2xl border border-(--line) bg-(--glass-panel-bg) p-6 shadow-(--shadow) lg:min-h-[460px]">
         {cover && (
-          <div className="relative mb-5 overflow-hidden rounded-xl border border-[var(--line)]">
+          <div className="relative mb-5 overflow-hidden rounded-xl border border-(--line)">
             <Image
               src={cover.src}
               alt={`${active.name} — ${cover.caption}`}
@@ -49,26 +49,26 @@ export default function WorkPreviewList({ projects }) {
           </div>
         )}
 
-        <div className="flex items-center gap-2 font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]">
+        <div className="flex items-center gap-2 font-(family-name:--font-mono) text-xs text-(--muted)">
           <span>{active.year}</span>
           <span>·</span>
           <span>{active.role}</span>
         </div>
-        <h3 className="mt-2 flex flex-wrap items-center gap-3 font-[family-name:var(--font-display)] text-2xl font-semibold text-[var(--paper)]">
+        <h3 className="mt-2 flex flex-wrap items-center gap-3 font-(family-name:--font-display) text-2xl font-semibold text-(--paper)">
           {active.name}
           {active.published && (
-            <span className="inline-flex items-center rounded-full border border-[var(--verify)]/40 bg-[var(--verify)]/10 px-2.5 py-1 font-[family-name:var(--font-mono)] text-[11px] font-normal uppercase tracking-wide text-[var(--verify)]">
+            <span className="inline-flex items-center rounded-full border border-(--verify)/40 bg-(--verify)/10 px-2.5 py-1 font-(family-name:--font-mono) text-[11px] font-normal uppercase tracking-wide text-(--verify)">
               Published on Google Play
             </span>
           )}
         </h3>
-        <p className="mt-1 text-sm text-[var(--mark)]">{active.tagline}</p>
-        <p className="mt-3 leading-relaxed text-[var(--muted)]">{active.body}</p>
+        <p className="mt-1 text-sm text-(--mark)">{active.tagline}</p>
+        <p className="mt-3 leading-relaxed text-(--muted)">{active.body}</p>
 
         <ul className="mt-[1.1rem] flex flex-wrap gap-2">
           {active.stack.map((s) => (
             <li
-              className="inline-flex items-center rounded-full border border-[var(--line)] bg-[var(--chip-bg)] px-3 py-1 font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]"
+              className="inline-flex items-center rounded-full border border-(--line) bg-(--chip-bg) px-3 py-1 font-(family-name:--font-mono) text-xs text-(--muted)"
               key={s}
             >
               {s}
@@ -78,14 +78,14 @@ export default function WorkPreviewList({ projects }) {
 
         <div className="mt-6 flex flex-wrap gap-4">
           <Link
-            className="font-[family-name:var(--font-mono)] text-sm text-[var(--mark)] hover:underline"
+            className="font-(family-name:--font-mono) text-sm text-(--mark) hover:underline"
             href={`/work/${slugify(active.name)}`}
           >
             Full case study →
           </Link>
           {active.href && (
             <a
-              className="font-[family-name:var(--font-mono)] text-sm text-[var(--mark)] hover:underline"
+              className="font-(family-name:--font-mono) text-sm text-(--mark) hover:underline"
               href={active.href}
               target="_blank"
               rel="noreferrer"

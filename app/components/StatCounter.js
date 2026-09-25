@@ -50,11 +50,11 @@ export default function StatCounter({ value, suffix = "", label, duration = 900 
 
   return (
     <div className="flex flex-col gap-1" ref={ref}>
-      <p className="flex items-baseline gap-0.5 font-[family-name:var(--font-display)] text-[clamp(1.8rem,4vw,2.6rem)] font-semibold leading-none text-[var(--paper)]">
+      <p className="flex items-baseline gap-0.5 font-(family-name:--font-display) text-[clamp(1.8rem,4vw,2.6rem)] font-semibold leading-none text-(--paper)">
         {display}
-        <span className="text-[0.55em] text-[var(--mark)]">{suffix}</span>
+        <span className="text-[0.55em] text-(--mark)">{suffix}</span>
       </p>
-      <p className="text-xs uppercase tracking-wide text-[var(--muted)]">{label}</p>
+      <p className="text-xs uppercase tracking-wide text-(--muted)">{label}</p>
     </div>
   );
 }

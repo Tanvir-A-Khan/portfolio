@@ -5,7 +5,7 @@
    theme values) because they're swapped at runtime via the
    [data-theme] attribute for the dark/light toggle. Every
    component references these through Tailwind's arbitrary-value
-   syntax, e.g. bg-[var(--ink)].
+   syntax, e.g. bg-(--ink).
    ============================================================ */
 :root {
   color-scheme: dark;
