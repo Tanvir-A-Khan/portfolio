@@ -226,7 +226,7 @@ export default function Page() {
                       {g.items.map((it) => (
                         <li
                           key={it.name}
-                          className={`text-sm text-(--muted) transition-colors transition-transform hover:translate-x-0.5 hover:text-(--paper) ${
+                          className={`text-sm text-(--muted) transition hover:translate-x-0.5 hover:text-(--paper) ${
                             coreStack.includes(it.name)
                               ? "before:mr-2 before:inline-block before:h-1.5 before:w-1.5 before:rounded-full before:bg-(--mark) before:align-middle before:content-['']"
                               : ""

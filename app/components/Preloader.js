@@ -63,7 +63,14 @@ export default function Preloader() {
       aria-hidden="true"
     >
       <div className="opacity-0 scale-95 [animation:hello-in_0.6s_cubic-bezier(0.16,1,0.3,1)_0.1s_forwards] motion-reduce:opacity-100 motion-reduce:scale-100">
-        <Image src="/hello.png" alt="" width={220} height={178} priority />
+        <Image
+          src="/hello.png"
+          alt=""
+          width={220}
+          height={178}
+          priority
+          style={{ width: "220px", height: "178px" }}
+        />
       </div>
       <div className="flex items-baseline gap-3 font-(family-name:--font-mono) text-(--muted)">
         <span className="text-sm tracking-wide text-(--paper)">{profile.shortName}</span>
