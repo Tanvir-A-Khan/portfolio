@@ -140,12 +140,12 @@ export default function Page() {
               {experience.map((j, i) => (
                 <Reveal key={j.org + j.period} delay={i * 50}>
                   <div
-                    className={`job group relative grid grid-cols-[auto_1fr_auto] items-start gap-x-6 rounded-2xl border border-[var(--line)] bg-[var(--glass-bg)] bg-[image:linear-gradient(152deg,var(--glass-sheen),transparent_58%)] p-6 shadow-[var(--shadow)] transition-transform hover:-translate-y-0.5 ${
+                    className={`job group relative grid grid-cols-[auto_1fr] items-start gap-x-6 gap-y-2 rounded-2xl border border-[var(--line)] bg-[var(--glass-bg)] bg-[image:linear-gradient(152deg,var(--glass-sheen),transparent_58%)] p-6 shadow-[var(--shadow)] transition-transform hover:-translate-y-0.5 lg:grid-cols-[auto_1fr_auto] ${
                       i === 0 ? "job-open" : ""
                     }`}
                   >
                     <span
-                      className={`job-expand-icon absolute right-6 top-1/2 -translate-y-1/2 text-[var(--mark)] transition-transform duration-300 ${
+                      className={`job-expand-icon absolute right-6 top-6 text-[var(--mark)] transition-transform duration-300 lg:top-1/2 lg:-translate-y-1/2 ${
                         i === 0 ? "rotate-45" : "group-hover:rotate-45"
                       }`}
                       aria-hidden="true"
@@ -155,7 +155,7 @@ export default function Page() {
                     <span className="font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <div>
+                    <div className="pr-8 lg:pr-0">
                       <p className="flex items-center gap-2 font-medium text-[var(--paper)]">
                         {j.org}
                         {j.note ? `, ${j.note}` : ""}
@@ -182,7 +182,7 @@ export default function Page() {
                         </div>
                       </div>
                     </div>
-                    <span className="whitespace-nowrap text-right font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]">
+                    <span className="col-span-2 font-[family-name:var(--font-mono)] text-xs text-[var(--muted)] lg:col-span-1 lg:whitespace-nowrap lg:text-right">
                       {j.period} · {j.place}
                     </span>
                   </div>
