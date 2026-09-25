@@ -27,7 +27,9 @@ export default function Reveal({ children, delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={shown ? "reveal is-in" : "reveal"}
+      className={`transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:!opacity-100 motion-reduce:!translate-y-0 ${
+        shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}

@@ -34,61 +34,76 @@ export default async function ProjectPage({ params }) {
       <Nav />
 
       <main>
-        <article className="case">
-          <div className="shell">
-            <nav className="case-breadcrumb" aria-label="Breadcrumb">
-              <Link href="/#work">Work</Link>
+        <article className="relative py-20">
+          <div className="mx-auto max-w-[1180px] px-6">
+            <nav
+              className="mb-6 flex items-center gap-2 font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]"
+              aria-label="Breadcrumb"
+            >
+              <Link className="hover:text-[var(--paper)]" href="/#work">
+                Work
+              </Link>
               <span aria-hidden="true">/</span>
               <span>{project.name}</span>
             </nav>
 
-            <p className="eyebrow">
+            <p className="mb-3 font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
               {project.year} · {project.role}
             </p>
-            <h1 className="case-title">{project.name}</h1>
-            <p className="case-tagline">{project.tagline}</p>
+            <h1 className="mt-2 font-[family-name:var(--font-display)] text-[clamp(2rem,5vw,3.2rem)] font-semibold text-[var(--paper)]">
+              {project.name}
+            </h1>
+            <p className="mt-2 text-lg text-[var(--mark)]">{project.tagline}</p>
 
-            <ul className="tags">
+            <ul className="mt-6 flex flex-wrap gap-2">
               {project.stack.map((s) => (
-                <li className="tag" key={s}>
+                <li
+                  className="inline-flex items-center rounded-full border border-[var(--line)] bg-[var(--chip-bg)] px-3 py-1 font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]"
+                  key={s}
+                >
                   {s}
                 </li>
               ))}
             </ul>
 
-            <p className="case-body">{project.body}</p>
+            <p className="mt-6 max-w-[70ch] leading-relaxed text-[var(--muted)]">{project.body}</p>
 
-            <div className="row-links">
+            <div className="mt-6 flex flex-wrap gap-4">
               {project.href && (
-                <a className="row-visit" href={project.href} target="_blank" rel="noreferrer">
+                <a
+                  className="font-[family-name:var(--font-mono)] text-sm text-[var(--mark)] hover:underline"
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Visit site ↗
                 </a>
               )}
             </div>
 
             {project.screenshots && (
-              <div className="case-gallery">
-                <ProjectGallery
-                  images={project.screenshots}
-                  projectName={project.name}
-                  variant="grid"
-                />
+              <div className="mt-10">
+                <ProjectGallery images={project.screenshots} projectName={project.name} variant="grid" />
               </div>
             )}
 
             {project.retro && (
-              <div className="case-retro">
+              <div className="mt-10 grid gap-8 border-t border-[var(--line)] pt-8 sm:grid-cols-2">
                 <div>
-                  <p className="case-retro-h">What went well</p>
-                  <ul>
+                  <p className="mb-3 font-[family-name:var(--font-mono)] text-sm uppercase text-[var(--paper)]">
+                    What went well
+                  </p>
+                  <ul className="flex flex-col gap-2 text-sm leading-relaxed text-[var(--muted)]">
                     {project.retro.wentWell.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <p className="case-retro-h is-change">What I&rsquo;d change</p>
-                  <ul>
+                  <p className="mb-3 font-[family-name:var(--font-mono)] text-sm uppercase text-[var(--mark)]">
+                    What I&rsquo;d change
+                  </p>
+                  <ul className="flex flex-col gap-2 text-sm leading-relaxed text-[var(--muted)]">
                     {project.retro.wouldChange.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
@@ -97,14 +112,20 @@ export default async function ProjectPage({ params }) {
               </div>
             )}
 
-            <div className="case-nav">
-              <Link href={`/work/${slugify(prev.name)}`} className="case-nav-link">
-                <span className="case-nav-eyebrow">← Previous</span>
-                <span className="case-nav-name">{prev.name}</span>
+            <div className="mt-12 grid gap-4 sm:grid-cols-2">
+              <Link
+                href={`/work/${slugify(prev.name)}`}
+                className="block rounded-2xl border border-[var(--line)] bg-[var(--glass-bg)] p-5 transition-colors hover:bg-[var(--glass-hover)]"
+              >
+                <span className="font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]">← Previous</span>
+                <span className="mt-1 block font-medium text-[var(--paper)]">{prev.name}</span>
               </Link>
-              <Link href={`/work/${slugify(next.name)}`} className="case-nav-link case-nav-next">
-                <span className="case-nav-eyebrow">Next →</span>
-                <span className="case-nav-name">{next.name}</span>
+              <Link
+                href={`/work/${slugify(next.name)}`}
+                className="block rounded-2xl border border-[var(--line)] bg-[var(--glass-bg)] p-5 text-right transition-colors hover:bg-[var(--glass-hover)]"
+              >
+                <span className="font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]">Next →</span>
+                <span className="mt-1 block font-medium text-[var(--paper)]">{next.name}</span>
               </Link>
             </div>
           </div>

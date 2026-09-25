@@ -49,12 +49,12 @@ export default function StatCounter({ value, suffix = "", label, duration = 900 
   }, [started, value, duration]);
 
   return (
-    <div className="stat" ref={ref}>
-      <p className="stat-value">
+    <div className="flex flex-col gap-1" ref={ref}>
+      <p className="flex items-baseline gap-0.5 font-[family-name:var(--font-display)] text-[clamp(1.8rem,4vw,2.6rem)] font-semibold leading-none text-[var(--paper)]">
         {display}
-        <span className="stat-suffix">{suffix}</span>
+        <span className="text-[0.55em] text-[var(--mark)]">{suffix}</span>
       </p>
-      <p className="stat-label">{label}</p>
+      <p className="text-xs uppercase tracking-wide text-[var(--muted)]">{label}</p>
     </div>
   );
 }

@@ -10,6 +10,9 @@ const SECTIONS = [
   { href: "/#contact", label: "Contact", num: "04" },
 ];
 
+const themeBtn =
+  "inline-flex items-center rounded-full border border-[var(--line)] bg-[var(--glass-bg)] px-4 py-2 text-xs font-[family-name:var(--font-mono)] text-[var(--paper)] transition-colors hover:bg-[var(--glass-hover)]";
+
 export default function Nav() {
   const [theme, setTheme] = useState("dark");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,32 +32,32 @@ export default function Nav() {
   const timeStr = now ? now.toLocaleTimeString("en-GB", { hour12: false }) : "--:--:--";
 
   return (
-    <nav className="nav">
-      <div className="shell nav-inner">
-        <a href="/#top" className="nav-mark">
+    <nav className="sticky top-0 z-50 border-b border-[var(--line)] bg-[var(--header-bg)] backdrop-blur-[14px]">
+      <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-4 px-6 py-4">
+        <a href="/#top" className="font-[family-name:var(--font-display)] text-lg font-semibold text-[var(--paper)]">
           {profile.shortName}
         </a>
 
-        <div className="nav-links">
+        <div className="hidden items-center gap-7 font-[family-name:var(--font-mono)] text-sm text-[var(--muted)] lg:flex">
           {SECTIONS.map((s) => (
-            <a key={s.href} href={s.href}>
-              <span className="nav-num">{s.num}</span>
+            <a key={s.href} href={s.href} className="transition-colors hover:text-[var(--paper)]">
+              <span className="mr-1.5 text-[var(--mark)]">{s.num}</span>
               {s.label}
             </a>
           ))}
         </div>
 
-        <div className="nav-right">
-          <span className="status">
-            <span className="status-dot" aria-hidden="true" />
+        <div className="flex items-center gap-3">
+          <span className="hidden items-center gap-2 font-[family-name:var(--font-mono)] text-xs text-[var(--muted)] sm:inline-flex">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--mark)]" aria-hidden="true" />
             {profile.location} · {profile.timezone} · {timeStr}
           </span>
-          <a className="theme-btn nav-cv" href="/Tanvir_Ahmed_Khan_CV.docx" download>
+          <a className={`${themeBtn} hidden sm:inline-flex`} href="/Tanvir_Ahmed_Khan_CV.docx" download>
             CV
           </a>
           <button
             type="button"
-            className="theme-btn"
+            className={themeBtn}
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
           >
@@ -62,7 +65,7 @@ export default function Nav() {
           </button>
           <button
             type="button"
-            className="menu-btn"
+            className={`${themeBtn} lg:hidden`}
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
@@ -73,10 +76,10 @@ export default function Nav() {
       </div>
 
       {menuOpen && (
-        <div className="mobile-menu">
+        <div className="grid grid-cols-2 gap-3 border-t border-[var(--line)] px-6 py-5 font-[family-name:var(--font-mono)] text-sm text-[var(--muted)] lg:hidden">
           {SECTIONS.map((s) => (
             <a key={s.href} href={s.href} onClick={() => setMenuOpen(false)}>
-              <span className="nav-num">{s.num}</span> {s.label}
+              <span className="text-[var(--mark)]">{s.num}</span> {s.label}
             </a>
           ))}
         </div>

@@ -16,7 +16,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en" data-theme="dark" className="scroll-smooth">
       <head suppressHydrationWarning>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body className="m-0 font-[family-name:var(--font-body)] antialiased transition-colors duration-300 [&_.preloader]:motion-reduce:hidden">
         <noscript>
           <style>{`.preloader { display: none !important; }`}</style>
         </noscript>

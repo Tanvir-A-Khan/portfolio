@@ -56,16 +56,26 @@ export default function Preloader() {
   if (hidden) return null;
 
   return (
-    <div className={done ? "preloader is-done" : "preloader"} aria-hidden="true">
-      <div className="preloader-hello">
+    <div
+      className={`preloader fixed inset-0 z-[200] flex flex-col items-center justify-center gap-6 bg-[var(--ink)] transition-transform duration-700 ease-[cubic-bezier(0.65,0,0.35,1)] ${
+        done ? "-translate-y-full" : "translate-y-0"
+      }`}
+      aria-hidden="true"
+    >
+      <div className="opacity-0 scale-95 [animation:hello-in_0.6s_cubic-bezier(0.16,1,0.3,1)_0.1s_forwards] motion-reduce:opacity-100 motion-reduce:scale-100">
         <Image src="/hello.png" alt="" width={220} height={178} priority />
       </div>
-      <div className="preloader-row">
-        <span className="preloader-name">{profile.shortName}</span>
-        <span className="preloader-pct">{progress}</span>
+      <div className="flex items-baseline gap-3 font-[family-name:var(--font-mono)] text-[var(--muted)]">
+        <span className="text-sm tracking-wide text-[var(--paper)]">{profile.shortName}</span>
+        <span className="text-sm after:ml-0.5 after:content-['%'] after:text-[var(--muted)]">
+          {progress}
+        </span>
       </div>
-      <div className="preloader-track">
-        <div className="preloader-fill" style={{ width: `${progress}%` }} />
+      <div className="h-[2px] w-40 overflow-hidden rounded-full bg-[var(--line)]">
+        <div
+          className="h-full bg-[var(--mark)] transition-[width] duration-100 ease-linear"
+          style={{ width: `${progress}%` }}
+        />
       </div>
     </div>
   );

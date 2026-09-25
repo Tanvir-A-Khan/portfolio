@@ -19,17 +19,25 @@ export default function ProjectGallery({ images, projectName, variant = "side" }
         },
       }}
     >
-      <div className={isGrid ? "row-gallery row-gallery-grid" : "row-gallery"}>
+      <div
+        className={
+          isGrid
+            ? "grid grid-cols-1 gap-4 sm:grid-cols-2"
+            : "flex flex-wrap gap-3"
+        }
+      >
         <Image.PreviewGroup>
           {images.map((shot) => (
-            <div className="row-gallery-item" key={shot.src}>
+            <div className="flex flex-col gap-2" key={shot.src}>
               <Image
                 src={shot.src}
                 alt={`${projectName} — ${shot.caption}`}
                 {...imgProps}
-                rootClassName="row-gallery-thumb"
+                rootClassName="overflow-hidden rounded-xl border border-[var(--line)]"
               />
-              <span className="row-shot-caption">{shot.caption}</span>
+              <span className="font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]">
+                {shot.caption}
+              </span>
             </div>
           ))}
         </Image.PreviewGroup>
