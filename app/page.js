@@ -65,6 +65,10 @@ export default function Page() {
                 </a>
               </p>
 
+              {profile.availability && (
+                <p className="mt-2 text-sm text-[var(--muted)]">{profile.availability}</p>
+              )}
+
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
                   className={`${pill} border-transparent bg-[var(--mark)] font-medium text-[var(--on-accent)] hover:bg-[var(--accent-up)]`}
@@ -240,51 +244,54 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ---------- Contact ---------- */}
-        <section className="relative min-h-[360px] py-20 lg:py-28" id="contact">
-          <div className={shell}>
-            <Reveal>
-              <p className={eyebrow}>04 — Contact</p>
-              <h2 className={sectionH2} style={{ marginBottom: "1.75rem" }}>
-                Got something that needs building? Say what it is.
-              </h2>
-              <a
-                className="mb-8 mt-2 block w-fit border-b-2 border-[var(--mark)] pb-2 font-[family-name:var(--font-display)] text-[clamp(1.5rem,4vw,2.2rem)] text-[var(--paper)] transition-colors hover:text-[var(--mark)]"
-                href={`mailto:${profile.email}`}
-              >
-                {profile.email}
-              </a>
-
-              <a
-                className={`${pill} border-[var(--verify)] bg-[var(--verify)]/10 text-[var(--verify)]`}
-                href="https://wa.me/8801625090976"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Message on WhatsApp
-              </a>
-
-              <div className="mt-16 flex flex-wrap justify-between gap-3 border-t border-[var(--line)] pt-8 font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]">
-                <span>
-                  {profile.name} · {profile.location}
-                </span>
-                <span>
-                  {profile.links
-                    .filter((l) => l.href.startsWith("http"))
-                    .map((l, i, arr) => (
-                      <span key={l.label}>
-                        <a className="hover:text-[var(--paper)]" href={l.href} target="_blank" rel="noreferrer">
-                          {l.label}
-                        </a>
-                        {i < arr.length - 1 ? " / " : ""}
-                      </span>
-                    ))}
-                </span>
-              </div>
-            </Reveal>
-          </div>
-        </section>
+        {/* ---------- Testimonials (placeholder — no content yet) ---------- */}
+        <section className="hidden" id="testimonials" aria-hidden="true" />
       </main>
+
+      {/* ---------- Contact ---------- */}
+      <footer className="relative min-h-[360px] py-20 lg:py-28" id="contact">
+        <div className={shell}>
+          <Reveal>
+            <p className={eyebrow}>04 — Contact</p>
+            <h2 className={sectionH2} style={{ marginBottom: "1.75rem" }}>
+              Got something that needs building? Say what it is.
+            </h2>
+            <a
+              className="mb-8 mt-2 block w-fit border-b-2 border-[var(--mark)] pb-2 font-[family-name:var(--font-display)] text-[clamp(1.5rem,4vw,2.2rem)] text-[var(--paper)] transition-colors hover:text-[var(--mark)]"
+              href={`mailto:${profile.email}`}
+            >
+              {profile.email}
+            </a>
+
+            <a
+              className={`${pill} border-[var(--verify)] bg-[var(--verify)]/10 text-[var(--verify)]`}
+              href="https://wa.me/8801625090976"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Message on WhatsApp
+            </a>
+
+            <div className="mt-16 flex flex-wrap justify-between gap-3 border-t border-[var(--line)] pt-8 font-[family-name:var(--font-mono)] text-xs text-[var(--muted)]">
+              <span>
+                {profile.name} · {profile.location}
+              </span>
+              <span>
+                {profile.links
+                  .filter((l) => l.href.startsWith("http"))
+                  .map((l, i, arr) => (
+                    <span key={l.label}>
+                      <a className="hover:text-[var(--paper)]" href={l.href} target="_blank" rel="noreferrer">
+                        {l.label}
+                      </a>
+                      {i < arr.length - 1 ? " / " : ""}
+                    </span>
+                  ))}
+              </span>
+            </div>
+          </Reveal>
+        </div>
+      </footer>
     </>
   );
 }

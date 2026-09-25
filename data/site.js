@@ -12,6 +12,7 @@ export const profile = {
   headline: "Three years shipping enterprise software, and my own products alongside it.",
   intro:
     "I'm Tanvir Ahmed Khan — a software engineer building contract-management software at IBM, full-stack across React, TypeScript and Node.js, with backend depth in Java/Spring Boot and Python/FastAPI elsewhere, and mobile apps I design, build and release myself.",
+  availability: "Open to select freelance and contract work alongside my full-time role.",
   links: [
     { label: "GitHub", href: "https://github.com/Tanvir-A-Khan" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/tanvir-a-khan" },
@@ -63,11 +64,11 @@ export const work = [
   {
     name: "Jachai",
     platform: "web",
-    tagline: "QR book authenticity verification, built at Rokomari.com",
+    tagline: "Built for Rokomari.com, Bangladesh's largest online bookstore, during a paid internship",
     year: "2024",
     stack: ["Spring Boot", "Hibernate", "Next.js", "TypeScript"],
     body:
-      "A QR-code book authenticity verification platform for Rokomari, Bangladesh's largest online bookstore — customers scan to confirm a copy is genuine rather than a counterfeit reprint. I built the generation and lookup services and the customer-facing verification flow.",
+      "Commissioned by Rokomari.com during my internship there: a QR-code book authenticity verification platform so customers can scan a copy and confirm it's genuine rather than a counterfeit reprint. I built the generation and lookup services and the customer-facing verification flow, shipped to production for their live storefront.",
     role: "Full-stack",
     href: null,
   },
@@ -81,6 +82,7 @@ export const work = [
       "A digital prayer bead counter, published on Google Play under my own developer account — designed, built and taken through the full release pipeline.",
     role: "Solo",
     href: null,
+    published: true,
   },
   {
     name: "Traffic Rush Dhaka",
@@ -101,7 +103,7 @@ export const experience = [
     org: "IBM",
     note: null,
     title: "Junior Software Engineer",
-    period: "2026 — Present",
+    period: "Aug 2026 — Present",
     place: "Remote · Dallas, TX",
     detail:
       "The same full-stack role on LambdaX, continued under a new name after Cognitus was acquired by IBM. React and TypeScript on the frontend, Node.js on the backend, building out the contract editor, calendar sync and an activity/audit logger, alongside diagnosing and resolving production defects within a distributed cross-timezone team.",
@@ -109,9 +111,9 @@ export const experience = [
   },
   {
     org: "Cognitus",
-    note: "acquired by IBM",
+    note: "an IBM company",
     title: "Software Engineer",
-    period: "2024 — 2026",
+    period: "Dec 2024 — Aug 2026",
     place: "Remote · Dallas, TX",
     detail:
       "Features for LambdaX, an enterprise agreement and contract management platform, in the lax-web-portal frontend. Built a full calendar module with two-way Google Calendar sync for events, tasks and milestones, and an in-app notification system with deep links to specific agreements and one-click attachment download. Resolved critical production defects affecting platform stability for enterprise users.",

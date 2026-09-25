@@ -54,8 +54,13 @@ export default function WorkPreviewList({ projects }) {
           <span>·</span>
           <span>{active.role}</span>
         </div>
-        <h3 className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-[var(--paper)]">
+        <h3 className="mt-2 flex flex-wrap items-center gap-3 font-[family-name:var(--font-display)] text-2xl font-semibold text-[var(--paper)]">
           {active.name}
+          {active.published && (
+            <span className="inline-flex items-center rounded-full border border-[var(--verify)]/40 bg-[var(--verify)]/10 px-2.5 py-1 font-[family-name:var(--font-mono)] text-[11px] font-normal uppercase tracking-wide text-[var(--verify)]">
+              Published on Google Play
+            </span>
+          )}
         </h3>
         <p className="mt-1 text-sm text-[var(--mark)]">{active.tagline}</p>
         <p className="mt-3 leading-relaxed text-[var(--muted)]">{active.body}</p>
