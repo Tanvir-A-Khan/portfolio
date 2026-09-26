@@ -12,7 +12,7 @@ const eyebrow = "mb-3 font-(family-name:--font-mono) text-xs uppercase tracking-
 const sectionH2 =
   "mb-10 mt-2 max-w-[46ch] font-(family-name:--font-display) text-[clamp(1.7rem,3.2vw,2.6rem)] font-semibold leading-tight text-(--paper)";
 const pill =
-  "inline-flex items-center gap-2 rounded-full border border-(--line) bg-(--glass-bg) bg-[image:linear-gradient(152deg,var(--glass-sheen),transparent_58%)] px-5 py-2.5 text-sm text-(--paper) shadow-(--shadow) backdrop-blur-[10px] backdrop-saturate-[1.2] transition-colors hover:border-(--border-hi) hover:bg-(--glass-hover)";
+  "inline-flex items-center gap-2 rounded-full border border-(--line) bg-(--glass-bg) bg-[image:linear-gradient(152deg,var(--glass-sheen),transparent_58%)] px-5 py-2.5 text-sm text-(--paper) shadow-(--shadow) backdrop-blur-[10px] backdrop-saturate-[1.2] transition-colors hover:border-(--border-hi) hover:bg-(--glass-hover) hover:text-(--mark)";
 export default function Page() {
   const webWork = work.filter((p) => p.platform === "web");
   const mobileWork = work.filter((p) => p.platform === "mobile");
@@ -67,7 +67,7 @@ export default function Page() {
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
-                  className={`${pill} border-transparent bg-(--mark) font-medium text-(--on-accent) hover:bg-(--accent-up)`}
+                  className={`${pill} border-transparent bg-none bg-(--cta)! font-medium text-(--on-accent)! hover:bg-(--cta-hover)! hover:text-(--on-accent)!`}
                   href="/Tanvir_Ahmed_Khan_CV.docx"
                   download
                 >
@@ -208,7 +208,7 @@ export default function Page() {
             </a>
 
             <a
-              className={`${pill} border-(--verify) bg-(--verify)/10 text-(--verify)`}
+              className={`${pill} border-(--verify) bg-(--verify)/10 text-(--verify) hover:text-(--verify)!`}
               href="https://wa.me/8801625090976"
               target="_blank"
               rel="noreferrer"

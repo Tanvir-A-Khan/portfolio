@@ -11,7 +11,7 @@ const SECTIONS = [
 ];
 
 const themeBtn =
-  "inline-flex items-center rounded-full border border-(--line) bg-(--glass-bg) px-4 py-2 text-xs font-(family-name:--font-mono) text-(--paper) transition-colors hover:bg-(--glass-hover)";
+  "inline-flex items-center rounded-full border border-(--line) bg-(--glass-bg) px-4 py-2 text-xs font-(family-name:--font-mono) text-(--paper) transition-colors hover:bg-(--glass-hover) hover:text-(--mark)";
 
 export default function Nav() {
   const [theme, setTheme] = useState("dark");
