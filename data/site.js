@@ -220,22 +220,16 @@ export const credentials = [
 ];
 
 export const testimonials = [
+  // Exact excerpt from the Received recommendation on Tanvir's LinkedIn.
+  // Checked 2026-10-17. Keep wording and attribution tied to the source.
   {
-    name: "Sarah Johnson",
-    role: "Team Lead at IBM",
-    text: "Tanvir is an exceptional software engineer who consistently delivered high-quality code for the LambdaX platform. His ability to work across full-stack technologies and collaborate effectively with distributed teams made him a valuable asset.",
-    avatar: "/avatars/sarah-johnson.jpg",
-  },
-  {
-    name: "Michael Chen",
-    role: "Technical Director at Kaz Software",
-    text: "Tanvir was instrumental in building our tax research platform. His expertise in Angular frontend development combined with his backend skills made him an excellent fit for our team and project requirements.",
-    avatar: "/avatars/michael-chen.jpg",
-  },
-  {
-    name: "Rokomari.com Team",
-    role: "Online Bookstore",
-    text: "Working with Tanvir to develop the QR-code verification system was a pleasure. He took ownership of the project from concept to launch, ensuring that customers received a seamless and secure experience.",
-    avatar: "/avatars/rokomari-team.jpg",
+    name: "Md. Al-Amin",
+    initials: "AA",
+    role: "Former teammate at Rokomari.com",
+    text: "He is organized, customer-oriented, and always ready to tackle any challenge with a smile.",
+    date: "2024-06-02",
+    dateLabel: "June 2, 2024",
+    authorHref: "https://www.linkedin.com/in/alaminkarno/",
+    sourceHref: "https://www.linkedin.com/in/tanvir-a-khan/details/recommendations/",
   },
 ];

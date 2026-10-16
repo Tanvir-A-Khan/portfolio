@@ -80,7 +80,16 @@ export default function Page() {
 
         <section className="section testimonial-section" id="testimonials"><div className="shell">
           <Reveal><SectionHeading number="04" label="Kind words" title={<>Better work happens<br /><span className="muted-heading">together.</span></>} /></Reveal>
-          <div className="testimonial-grid">{testimonials.map((t, i) => <Reveal key={t.name} delay={i * 70}><figure className="testimonial"><span className="quote-mark" aria-hidden="true">“</span><blockquote>{t.text}</blockquote><figcaption><span className="person-initials" aria-hidden="true">{t.name.split(" ").slice(0, 2).map(n => n[0]).join("")}</span><span><strong>{t.name}</strong><small>{t.role}</small></span></figcaption></figure></Reveal>)}</div>
+          <div className={`testimonial-grid${testimonials.length === 1 ? " testimonial-grid-single" : ""}`}>{testimonials.map((t, i) => <Reveal key={t.name} delay={i * 70}>
+            <figure className="testimonial">
+              <div className="testimonial-topline"><span className="quote-mark" aria-hidden="true">“</span><span className="recommendation-source"><BrandIcon name="LinkedIn" />LinkedIn recommendation · Excerpt</span></div>
+              <blockquote cite={t.sourceHref}>{t.text}</blockquote>
+              <figcaption>
+                <div className="recommendation-author"><span className="person-initials" aria-hidden="true">{t.initials}</span><span><a href={t.authorHref} target="_blank" rel="noreferrer"><strong>{t.name}</strong></a><small>{t.role}</small><time dateTime={t.date}>{t.dateLabel}</time></span></div>
+                <a className="text-link recommendation-link" href={t.sourceHref} target="_blank" rel="noreferrer">Read full recommendation <Icon name="diagonal" size={17} /></a>
+              </figcaption>
+            </figure>
+          </Reveal>)}</div>
         </div></section>
       </main>
       <footer id="contact" className="contact-section"><div className="shell">

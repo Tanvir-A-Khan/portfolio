@@ -15,6 +15,8 @@ Open http://localhost:3000. Build for production with `npm run build`, then run 
 
 Edit `data/site.js` for profile links, projects, experience, skills, credentials, and testimonials. Each project automatically receives a page at `/work/<project-slug>` and an entry in the sitemap.
 
+Testimonials use exact excerpts from received LinkedIn recommendations, with author, date, and source links. Only add recommendations verified on the linked profile; do not add placeholder quotes or invented attributions.
+
 Project fields include:
 
 - `name`, `platform`, `tagline`, `year`, `role`, `body`, and `stack` for the project description.
