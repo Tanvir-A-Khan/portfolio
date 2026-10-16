@@ -36,8 +36,7 @@ Profile links use icons with accessible labels. The site includes keyboard focus
 
 The GitHub repository is `Tanvir-A-Khan/portfolio`, with `main` as its production branch. Existing Vercel projects are `portfolio` and `tanvirkhan`.
 
-- Primary domain: https://tanvir.a.khan.dev
-- Alternate portfolio: https://tanvirkhan.vercel.app
+- Live portfolio: https://tanvirkhan.vercel.app
 
 Push approved changes to `main` to trigger the connected Vercel deployments. Metadata and sitemap settings are in `app/layout.js` and `app/sitemap.js`.
 
