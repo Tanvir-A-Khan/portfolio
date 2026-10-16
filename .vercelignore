@@ -1,0 +1,7 @@
+.git
+.next
+node_modules
+.vercel
+.DS_Store
+*.log
+output

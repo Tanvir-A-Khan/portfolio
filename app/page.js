@@ -1,241 +1,94 @@
 import Image from "next/image";
 import Nav from "./components/Nav";
 import Reveal from "./components/Reveal";
-import StatCounter from "./components/StatCounter";
+import Icon from "./components/Icon";
+import BrandIcon from "./components/BrandIcon";
 import WorkPreviewList from "./components/WorkPreviewList";
 import ExperienceAccordion from "./components/ExperienceAccordion";
-import { profile, work, experience, stack, coreStack, credentials } from "../data/site";
+import { profile, work, experience, stack, coreStack, credentials, testimonials } from "../data/site";
 import { slugify } from "../lib/slug";
 
-const shell = "mx-auto max-w-[1180px] px-6";
-const eyebrow = "mb-3 font-(family-name:--font-mono) text-xs uppercase tracking-[0.14em] text-(--muted)";
-const sectionH2 =
-  "mb-10 mt-2 max-w-[46ch] font-(family-name:--font-display) text-[clamp(1.7rem,3.2vw,2.6rem)] font-semibold leading-tight text-(--paper)";
-const pill =
-  "inline-flex items-center gap-2 rounded-full border border-(--line) bg-(--glass-bg) bg-[image:linear-gradient(152deg,var(--glass-sheen),transparent_58%)] px-5 py-2.5 text-sm text-(--paper) shadow-(--shadow) backdrop-blur-[10px] backdrop-saturate-[1.2] transition-colors hover:border-(--border-hi) hover:bg-(--glass-hover) hover:text-(--mark)";
+const companyBrands = [
+  { name: "IBM", key: "ibm", logo: "/logos/ibm.svg", href: "https://www.ibm.com/", focus: "Enterprise software" },
+  { name: "Cognitus", key: "cognitus", logo: "/logos/cognitus.svg", href: "https://cognitus.com/", focus: "SAP & contract management" },
+  { name: "Kaz Software", key: "kaz", logo: "/logos/kaz.png", href: "https://www.kaz.com.bd/", focus: "Product engineering" },
+  { name: "Rokomari.com", key: "rokomari", logo: "/logos/rokomari.svg", href: "https://www.rokomari.com/", focus: "E-commerce" },
+];
+
+function SectionHeading({ number, label, title, children }) {
+  return <div className="section-heading"><div><p className="eyebrow"><span>{number}</span>{label}</p><h2>{title}</h2></div>{children && <p className="section-description">{children}</p>}</div>;
+}
+
 export default function Page() {
-  const webWork = work.filter((p) => p.platform === "web");
-  const mobileWork = work.filter((p) => p.platform === "mobile");
-
-  const yearsShipping = new Date().getFullYear() - profile.sinceYear;
-
+  const years = new Date().getFullYear() - profile.sinceYear;
+  const socialLinks = profile.links.filter(link => ["GitHub", "LinkedIn", "Codeforces", "CodeChef", "HackerRank", "VJudge"].includes(link.label));
+  const linkedIn = profile.links.find(link => link.label === "LinkedIn");
   return (
     <>
       <Nav />
-
-      <main id="top">
-        {/* ---------- Hero ---------- */}
-        <header className="relative min-h-[520px] pb-20 pt-28 lg:pb-28 lg:pt-40">
-          <div className={shell}>
-            <div>
-              <p className={eyebrow}>
-                {profile.role} · {profile.location}
-              </p>
-              <h1 className="max-w-[18ch] font-(family-name:--font-display) text-[clamp(2.1rem,6vw,3.6rem)] font-semibold leading-[1.08] text-(--paper)">
-                {profile.headline}
-              </h1>
-
-              <div className="mt-8 flex items-center gap-4">
-                <div className="relative h-40 w-40 overflow-hidden rounded-2xl border border-(--line) shadow-(--shadow) transition-transform hover:-translate-y-1 lg:h-60 lg:w-60">
-                  <Image
-                    src="/avatar.png"
-                    alt={`Portrait of ${profile.name}`}
-                    fill
-                    sizes="(min-width: 1024px) 240px, 160px"
-                    style={{ objectFit: "cover" }}
-                    priority
-                  />
-                </div>
-                <p className="font-(family-name:--font-mono) text-sm text-(--muted)">
-                  {profile.name}
-                </p>
-              </div>
-
-              <p className="mt-6 max-w-[58ch] leading-relaxed text-(--muted)">{profile.intro}</p>
-
-              <p className="mt-5 inline-flex items-center gap-2 font-(family-name:--font-mono) text-sm text-(--muted)">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-(--mark)" aria-hidden="true" />
-                Currently building{" "}
-                <a className="text-(--paper) hover:text-(--mark)" href={`#work-${slugify(profile.currentlyBuilding)}`}>
-                  {profile.currentlyBuilding}
-                </a>
-              </p>
-
-              {profile.availability && (
-                <p className="mt-2 text-sm text-(--muted)">{profile.availability}</p>
-              )}
-
-              <div className="mt-7 flex flex-wrap gap-3">
-                <a
-                  className={`${pill} border-transparent bg-none bg-(--cta)! font-medium text-(--on-accent)! hover:bg-(--cta-hover)! hover:text-(--on-accent)!`}
-                  href="/Tanvir_Ahmed_Khan_CV.docx"
-                  download
-                >
-                  Download CV
-                </a>
-                {profile.links.map((l) => (
-                  <a
-                    className={pill}
-                    key={l.label}
-                    href={l.href}
-                    target={l.href.startsWith("http") ? "_blank" : undefined}
-                    rel={l.href.startsWith("http") ? "noreferrer" : undefined}
-                  >
-                    {l.label}
-                  </a>
-                ))}
-              </div>
-
-              <div className="mt-12 grid grid-cols-2 gap-6 border-t border-(--line) pt-8 lg:grid-cols-4">
-                <StatCounter value={yearsShipping} suffix="+" label="Years shipping code" />
-                <StatCounter value={work.length} label="Projects shipped" />
-                <StatCounter value={experience.length} label="Teams worked with" />
-                <StatCounter value={credentials.length} label="Awards & credentials" />
-              </div>
+      <main id="main-content" tabIndex={-1}>
+        <header className="hero shell" id="top">
+          <div className="hero-copy">
+            <p className="eyebrow hero-eyebrow"><span className="status-dot" />Software engineer & product builder</p>
+            <h1>Thoughtful code.<br />Real-world<br /><span className="hero-accent">impact.</span><span className="hero-star" aria-hidden="true">✳</span></h1>
+            <p className="hero-intro">I’m Tanvir, a software engineer at <strong>IBM</strong>. I build enterprise software and independent products, from the first idea to the final release.</p>
+            <div className="hero-actions"><a className="button button-primary" href="#work">Explore my work <Icon name="diagonal" size={18} /></a><a className="button button-secondary" href="/Tanvir_Ahmed_Khan_CV.docx" download>Download CV <Icon name="download" size={17} /></a></div>
+            <div className="hero-socials" aria-label="Profile links">{socialLinks.map(l => <a className="profile-icon-link" key={l.label} href={l.href} target="_blank" rel="noreferrer" aria-label={l.label} title={l.label}><BrandIcon name={l.label} /></a>)}</div>
+          </div>
+          <div className="hero-visual">
+            <div className="portrait-frame">
+              <div className="portrait-topline"><span>BASED IN DHAKA, BD</span><span>UTC+6 / BANGLADESH</span></div>
+              <div className="portrait-image"><Image src="/avatar.png" alt={`Portrait of ${profile.name}`} fill priority sizes="(max-width: 760px) 90vw, 440px" /></div>
+              <div className="portrait-caption"><div><strong>{profile.name}</strong><span>Software Engineer · IBM</span></div><span className="portrait-sign" aria-hidden="true">TAK</span></div>
             </div>
+            <div className="availability-note"><span className="status-dot" /><span>Open to select freelance projects</span><Icon name="diagonal" size={14} /></div>
           </div>
         </header>
-
-        {/* ---------- Work ---------- */}
-        <section className="relative min-h-[500px] py-20 lg:py-28" id="work">
-          <div className={shell}>
-            <Reveal>
-              <p className={eyebrow}>01 — Selected work</p>
-              <h2 className={sectionH2}>Things I built, and what was actually hard about each.</h2>
-            </Reveal>
-
-            <Reveal>
-              <div className="mt-10">
-                <h3 className="mb-4 font-(family-name:--font-mono) text-sm uppercase tracking-wide text-(--muted)">
-                  Web pages
-                </h3>
-                <WorkPreviewList projects={webWork} />
-              </div>
-            </Reveal>
-
-            <Reveal>
-              <div className="mt-14">
-                <h3 className="mb-4 font-(family-name:--font-mono) text-sm uppercase tracking-wide text-(--muted)">
-                  Mobile apps
-                </h3>
-                <WorkPreviewList projects={mobileWork} />
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ---------- Experience ---------- */}
-        <section className="relative min-h-[500px] py-20 lg:py-28" id="experience">
-          <div className={shell}>
-            <Reveal>
-              <p className={eyebrow}>02 — Experience</p>
-              <h2 className={sectionH2}>Where I&rsquo;ve done it.</h2>
-            </Reveal>
-
-            <ExperienceAccordion experience={experience} />
-
-            <Reveal>
-              <ul className="mt-10 grid gap-x-8 gap-y-2 font-(family-name:--font-mono) text-sm text-(--muted) sm:grid-cols-2">
-                {credentials.map((c) => (
-                  <li key={c} className="relative pl-4 before:absolute before:left-0 before:text-(--mark) before:content-['•']">
-                    {c}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ---------- Stack ---------- */}
-        <section className="relative min-h-[500px] py-20 lg:py-28" id="stack">
-          <div className={shell}>
-            <Reveal>
-              <p className={eyebrow}>03 — Stack</p>
-              <h2 className={sectionH2}>What I reach for.</h2>
-              <p className="mb-8 inline-flex items-center gap-2 font-(family-name:--font-mono) text-xs text-(--muted)">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-(--mark)" aria-hidden="true" /> marks a
-                daily driver
-              </p>
-            </Reveal>
-
-            <Reveal>
-              <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-                {stack.map((g) => (
-                  <div key={g.group}>
-                    <h3 className="mb-4 flex items-center gap-2 font-(family-name:--font-mono) text-sm uppercase tracking-wide text-(--paper)">
-                      {g.group}
-                      <span className="text-xs text-(--muted)">{g.items.length}</span>
-                    </h3>
-                    <ul className="flex flex-col gap-2">
-                      {g.items.map((it) => (
-                        <li
-                          key={it.name}
-                          className={`text-sm text-(--muted) transition hover:translate-x-0.5 hover:text-(--paper) ${
-                            coreStack.includes(it.name)
-                              ? "before:mr-2 before:inline-block before:h-1.5 before:w-1.5 before:rounded-full before:bg-(--mark) before:align-middle before:content-['']"
-                              : ""
-                          }`}
-                          title={it.note}
-                        >
-                          {it.name}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ---------- Testimonials (placeholder — no content yet) ---------- */}
-        <section className="hidden" id="testimonials" aria-hidden="true" />
-      </main>
-
-      {/* ---------- Contact ---------- */}
-      <footer className="relative min-h-[360px] py-20 lg:py-28" id="contact">
-        <div className={shell}>
-          <Reveal>
-            <p className={eyebrow}>04 — Contact</p>
-            <h2 className={sectionH2} style={{ marginBottom: "1.75rem" }}>
-              Got something that needs building? Say what it is.
-            </h2>
-            <a
-              className="mb-8 mt-2 block w-fit border-b-2 border-(--mark) pb-2 font-(family-name:--font-display) text-[clamp(1.5rem,4vw,2.2rem)] text-(--paper) transition-colors hover:text-(--mark)"
-              href={`mailto:${profile.email}`}
-            >
-              {profile.email}
-            </a>
-
-            <a
-              className={`${pill} border-(--verify) bg-(--verify)/10 text-(--verify) hover:text-(--verify)!`}
-              href="https://wa.me/8801625090976"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Message on WhatsApp
-            </a>
-
-            <div className="mt-16 flex flex-wrap justify-between gap-3 border-t border-(--line) pt-8 font-(family-name:--font-mono) text-xs text-(--muted)">
-              <span>
-                {profile.name} · {profile.location}
-              </span>
-              <span>
-                {profile.links
-                  .filter((l) => l.href.startsWith("http"))
-                  .map((l, i, arr) => (
-                    <span key={l.label}>
-                      <a className="hover:text-(--paper)" href={l.href} target="_blank" rel="noreferrer">
-                        {l.label}
-                      </a>
-                      {i < arr.length - 1 ? " / " : ""}
-                    </span>
-                  ))}
-              </span>
+        <div className="shell"><div className="hero-bottom"><p><span className="status-dot" />Currently building <a href={`#work-${slugify(profile.currentlyBuilding)}`}>{profile.currentlyBuilding}<Icon name="diagonal" size={13} /></a></p><a className="scroll-note" href="#work">Scroll to explore <span aria-hidden="true">↓</span></a></div></div>
+        <section className="credibility" aria-labelledby="teams-heading">
+          <div className="shell credibility-inner">
+            <div className="credibility-heading">
+              <div><p className="eyebrow">Built with great people</p><h2 id="teams-heading">Experience across <span>teams & products.</span></h2></div>
+              <div className="years-note"><strong>{years}+</strong><span>years of<br />shipping code</span></div>
             </div>
-          </Reveal>
-        </div>
-      </footer>
+            <div className="company-grid">
+              {companyBrands.map(company => <a key={company.key} className={`company-card company-${company.key}`} href={company.href} target="_blank" rel="noreferrer" aria-label={`Visit ${company.name}`}>
+                <span className="company-card-arrow"><Icon name="diagonal" size={16} /></span>
+                <div className="company-logo"><Image src={company.logo} alt={`${company.name} logo`} width={180} height={60} unoptimized /></div>
+                <div className="company-card-caption"><span>{company.focus}</span><span className="company-card-dot" /></div>
+              </a>)}
+            </div>
+          </div>
+        </section>
+
+        <section className="section shell" id="work">
+          <Reveal><SectionHeading number="01" label="Selected work" title={<>Built to solve.<br /><span className="muted-heading">Made to last.</span></>}>Enterprise platforms, independent products, and a few ideas that became something real.</SectionHeading></Reveal>
+          <WorkPreviewList projects={work} />
+        </section>
+
+        <section className="section experience-section" id="experience"><div className="shell experience-layout">
+          <Reveal><div className="experience-intro"><p className="eyebrow"><span>02</span>The journey</p><h2>Good work.<br /><span className="muted-heading">Great teams.</span></h2><p>From a high-traffic bookstore to enterprise software. Every team has shaped how I build.</p><a className="text-link" href="/Tanvir_Ahmed_Khan_CV.docx" download>View my résumé <Icon name="diagonal" size={17} /></a><div className="experience-stat"><strong>{experience.length.toString().padStart(2, "0")}</strong><span>teams.<br />A lot of lessons.</span></div></div></Reveal>
+          <ExperienceAccordion experience={experience} />
+        </div></section>
+
+        <section className="section shell" id="stack">
+          <Reveal><SectionHeading number="03" label="My toolkit" title={<>The right tools.<br /><span className="muted-heading">For the real problem.</span></>}>Full-stack by experience. Product-minded by nature. These are the tools I use to connect the two.</SectionHeading></Reveal>
+          <div className="toolkit-grid">{stack.map((group, index) => <Reveal key={group.group} delay={index * 60}><div className="toolkit-group"><div className="toolkit-icon"><Icon name={["code", "layers", "database", "tools"][index]} size={22} /></div><h3>{group.group}</h3><ul>{group.items.map(item => <li key={item.name} title={item.note}>{item.name}{coreStack.includes(item.name) && <span className="daily-dot" aria-label="Daily driver" />}</li>)}</ul></div></Reveal>)}</div>
+          <p className="toolkit-legend"><span className="daily-dot" /> My daily drivers</p>
+          <Reveal><div className="recognition"><div><p className="eyebrow">Beyond the day job</p><h3>A competitive streak.<br />A constant curiosity.</h3></div><ul>{credentials.map(c => <li key={c}><span aria-hidden="true">↗</span>{c}</li>)}</ul></div></Reveal>
+        </section>
+
+        <section className="section testimonial-section" id="testimonials"><div className="shell">
+          <Reveal><SectionHeading number="04" label="Kind words" title={<>Better work happens<br /><span className="muted-heading">together.</span></>} /></Reveal>
+          <div className="testimonial-grid">{testimonials.map((t, i) => <Reveal key={t.name} delay={i * 70}><figure className="testimonial"><span className="quote-mark" aria-hidden="true">“</span><blockquote>{t.text}</blockquote><figcaption><span className="person-initials" aria-hidden="true">{t.name.split(" ").slice(0, 2).map(n => n[0]).join("")}</span><span><strong>{t.name}</strong><small>{t.role}</small></span></figcaption></figure></Reveal>)}</div>
+        </div></section>
+      </main>
+      <footer id="contact" className="contact-section"><div className="shell">
+        <div className="contact-top"><p className="eyebrow"><span>05</span>Have something in mind?</p><p><span className="status-dot" />Available for select projects</p></div>
+        <div className="contact-main"><h2>Let’s build<br />something <span>great.</span></h2><a className="contact-arrow" href={`mailto:${profile.email}`} aria-label="Start a conversation by email"><Icon name="diagonal" size={48} /></a></div>
+        <div className="contact-links"><a className="contact-email" href={`mailto:${profile.email}`}><BrandIcon name="Email" />{profile.email}<Icon name="diagonal" size={20} /></a><div className="contact-options">{linkedIn && <a className="profile-icon-link" href={linkedIn.href} target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn"><BrandIcon name="LinkedIn" /></a>}<a className="profile-icon-link" href="https://wa.me/8801625090976" target="_blank" rel="noreferrer" aria-label="WhatsApp" title="WhatsApp"><BrandIcon name="WhatsApp" /></a></div></div>
+        <div className="footer-bottom"><a className="brand footer-brand" href="#top"><span className="brand-mark">t<span>.</span></span><span>{profile.shortName}</span></a><p>© {new Date().getFullYear()} {profile.name}</p><div>{socialLinks.map(l => <a className="profile-icon-link" key={l.label} href={l.href} target="_blank" rel="noreferrer" aria-label={l.label} title={l.label}><BrandIcon name={l.label} /></a>)}<a href="#top">Back to top ↑</a></div></div>
+      </div></footer>
     </>
   );
 }

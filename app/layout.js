@@ -1,7 +1,5 @@
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import Background from "./components/Background";
-import Preloader from "./components/Preloader";
 import { profile } from "../data/site";
 
 export const metadata = {
@@ -35,9 +33,10 @@ const personJsonLd = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="dark" className="scroll-smooth">
+    <html lang="en" data-theme="light" data-scroll-behavior="smooth" className="scroll-smooth" suppressHydrationWarning>
       <head suppressHydrationWarning>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <script dangerouslySetInnerHTML={{ __html: `try { document.documentElement.dataset.theme = localStorage.getItem('portfolio-theme') === 'dark' ? 'dark' : 'light'; } catch {}` }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -49,13 +48,9 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
       </head>
-      <body className="m-0 font-(family-name:--font-body) antialiased transition-colors duration-300 [&_.preloader]:motion-reduce:hidden">
-        <noscript>
-          <style>{`.preloader { display: none !important; }`}</style>
-        </noscript>
-        <Background />
+      <body className="m-0 font-(family-name:--font-body) antialiased">
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <AntdRegistry>
-          <Preloader />
           {children}
         </AntdRegistry>
       </body>

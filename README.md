@@ -1,50 +1,44 @@
 # Tanvir Ahmed Khan — Portfolio
 
-Next.js 15 (App Router), zero UI dependencies. Static-prerendered, ~106 kB first load.
+A responsive Next.js 15 portfolio with project previews, case-study pages, work experience, a technology toolkit, and contact links.
 
 ## Run locally
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
+npm run dev
 ```
 
-## Deploy to Vercel
+Open http://localhost:3000. Build for production with `npm run build`, then run the production server with `npm start`.
 
-```bash
-git init
-git add -A
-git commit -m "portfolio"
-git branch -M main
-git remote add origin git@github.com:Tanvir-A-Khan/portfolio.git
-git push -u origin main
-```
+## Content and assets
 
-Then on vercel.com: **Add New → Project → import the repo → Deploy.** No build settings to change; Vercel detects Next.js.
+Edit `data/site.js` for profile links, projects, experience, skills, credentials, and testimonials. Each project automatically receives a page at `/work/<project-slug>` and an entry in the sitemap.
 
-**Set the URL** under Project → Settings → Domains. The project name becomes the subdomain, so name the project `tanvirkhan` to get `tanvirkhan.vercel.app`. For a custom domain, add it there and Vercel prints the two DNS records to set at your registrar.
+Project fields include:
 
-## Editing
+- `name`, `platform`, `tagline`, `year`, `role`, `body`, and `stack` for the project description.
+- `href` for an optional external product link.
+- `selectorLogo` for web-project branding, or `icon` for a mobile app icon.
+- `screenshots`, an array of `{ src, caption }` entries used by the showcase and project gallery.
 
-Everything you'd want to change is in **`data/site.js`** — profile text, the hero parse demo, projects, jobs, stack, credentials. The components read from it and shouldn't need touching.
+Original logos, app icons, and screenshots live in `public/`. Asset source notes are included in the relevant asset folders. Testimonials display initials; their text and attribution are maintained in `data/site.js`.
 
-Two things to know about that file:
+## Design and behavior
 
-- `parseDemo.marks` values must appear **verbatim** in `parseDemo.raw`, or they won't get highlighted.
-- `work[].href` is `null` everywhere. Set it to a live URL or repo link when you have one — nothing renders it yet, so wire it into `row-name` in `app/page.js` if you want the titles clickable.
+`app/globals.css` defines the theme, typography, layout, and responsive breakpoints. The portfolio starts in a warm light theme and saves a visitor's chosen light or dark theme locally. The portrait keeps its original colors.
 
-## Design tokens
+The project showcase supports category filters and selection by hover, click, or keyboard focus. Its height stays fixed at 560px on desktop and 840px on mobile; longer descriptions scroll inside the panel. Journey rows expand on hover and remain operable by click or keyboard.
 
-All colors, fonts, and spacing are CSS custom properties at the top of `app/globals.css`, under `:root` (dark) and `[data-theme="light"]`. Change `--mark` to reskin the accent everywhere in one edit.
+Profile links use icons with accessible labels. The site includes keyboard focus indicators, a skip link, reduced-motion support, and responsive navigation.
 
-## Responsive breakpoints
+## Deployment
 
-| Width | Layout |
-|---|---|
-| < 640px | Single column, parse panel stacks vertically, nav links hidden |
-| 640–1023px | Two-column parse panel and work rows, stack in 2 columns |
-| ≥ 1024px | Nav links visible, asymmetric work rows, stack in 5 columns |
+The GitHub repository is `Tanvir-A-Khan/portfolio`, with `main` as its production branch. Existing Vercel projects are `portfolio` and `tanvirkhan`.
 
-## Accessibility
+- Primary domain: https://tanvir.a.khan.dev
+- Alternate portfolio: https://tanvirkhan.vercel.app
 
-Visible keyboard focus on all interactive elements, `prefers-reduced-motion` respected (all reveals and the parse animation disable), semantic landmarks, contrast checked against the ink and paper tokens.
+Push approved changes to `main` to trigger the connected Vercel deployments. Metadata and sitemap settings are in `app/layout.js` and `app/sitemap.js`.
+
+Local design exports under `output/` are not part of the website release.

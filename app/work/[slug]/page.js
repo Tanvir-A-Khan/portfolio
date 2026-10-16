@@ -1,136 +1,34 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Nav from "../../components/Nav";
+import Icon from "../../components/Icon";
 import ProjectGallery from "../../components/ProjectGallery";
 import { profile, work } from "../../../data/site";
 import { slugify } from "../../../lib/slug";
 
 export function generateStaticParams() {
-  return work.map((p) => ({ slug: slugify(p.name) }));
+  return work.map(p => ({ slug: slugify(p.name) }));
 }
-
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const project = work.find((p) => slugify(p.name) === slug);
-  if (!project) return {};
-
-  return {
-    title: `${project.name} — ${profile.name}`,
-    description: project.tagline,
-  };
+  const project = work.find(p => slugify(p.name) === slug);
+  return project ? { title: `${project.name} — ${profile.name}`, description: project.tagline } : {};
 }
-
 export default async function ProjectPage({ params }) {
   const { slug } = await params;
-  const index = work.findIndex((p) => slugify(p.name) === slug);
+  const index = work.findIndex(p => slugify(p.name) === slug);
   if (index === -1) notFound();
-
   const project = work[index];
   const prev = work[(index - 1 + work.length) % work.length];
   const next = work[(index + 1) % work.length];
-
-  return (
-    <>
-      <Nav />
-
-      <main>
-        <article className="relative py-20">
-          <div className="mx-auto max-w-[1180px] px-6">
-            <nav
-              className="mb-6 flex items-center gap-2 font-(family-name:--font-mono) text-xs text-(--muted)"
-              aria-label="Breadcrumb"
-            >
-              <Link className="hover:text-(--paper)" href="/#work">
-                Work
-              </Link>
-              <span aria-hidden="true">/</span>
-              <span>{project.name}</span>
-            </nav>
-
-            <p className="mb-3 font-(family-name:--font-mono) text-xs uppercase tracking-[0.14em] text-(--muted)">
-              {project.year} · {project.role}
-            </p>
-            <h1 className="mt-2 font-(family-name:--font-display) text-[clamp(2rem,5vw,3.2rem)] font-semibold text-(--paper)">
-              {project.name}
-            </h1>
-            <p className="mt-2 text-lg text-(--mark)">{project.tagline}</p>
-
-            <ul className="mt-6 flex flex-wrap gap-2">
-              {project.stack.map((s) => (
-                <li
-                  className="inline-flex items-center rounded-full border border-(--line) bg-(--chip-bg) px-3 py-1 font-(family-name:--font-mono) text-xs text-(--muted)"
-                  key={s}
-                >
-                  {s}
-                </li>
-              ))}
-            </ul>
-
-            <p className="mt-6 max-w-[70ch] leading-relaxed text-(--muted)">{project.body}</p>
-
-            <div className="mt-6 flex flex-wrap gap-4">
-              {project.href && (
-                <a
-                  className="font-(family-name:--font-mono) text-sm text-(--mark) hover:underline"
-                  href={project.href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Visit site ↗
-                </a>
-              )}
-            </div>
-
-            {project.screenshots && (
-              <div className="mt-10">
-                <ProjectGallery images={project.screenshots} projectName={project.name} variant="grid" />
-              </div>
-            )}
-
-            {project.retro && (
-              <div className="mt-10 grid gap-8 border-t border-(--line) pt-8 sm:grid-cols-2">
-                <div>
-                  <p className="mb-3 font-(family-name:--font-mono) text-sm uppercase text-(--paper)">
-                    What went well
-                  </p>
-                  <ul className="flex flex-col gap-2 text-sm leading-relaxed text-(--muted)">
-                    {project.retro.wentWell.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <p className="mb-3 font-(family-name:--font-mono) text-sm uppercase text-(--mark)">
-                    What I&rsquo;d change
-                  </p>
-                  <ul className="flex flex-col gap-2 text-sm leading-relaxed text-(--muted)">
-                    {project.retro.wouldChange.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
-
-            <div className="mt-12 grid gap-4 sm:grid-cols-2">
-              <Link
-                href={`/work/${slugify(prev.name)}`}
-                className="block rounded-2xl border border-(--line) bg-(--glass-bg) p-5 transition-colors hover:bg-(--glass-hover)"
-              >
-                <span className="font-(family-name:--font-mono) text-xs text-(--muted)">← Previous</span>
-                <span className="mt-1 block font-medium text-(--paper)">{prev.name}</span>
-              </Link>
-              <Link
-                href={`/work/${slugify(next.name)}`}
-                className="block rounded-2xl border border-(--line) bg-(--glass-bg) p-5 text-right transition-colors hover:bg-(--glass-hover)"
-              >
-                <span className="font-(family-name:--font-mono) text-xs text-(--muted)">Next →</span>
-                <span className="mt-1 block font-medium text-(--paper)">{next.name}</span>
-              </Link>
-            </div>
-          </div>
-        </article>
-      </main>
-    </>
-  );
+  return <><Nav /><main id="main-content" tabIndex={-1} className="case-study shell"><article>
+    <Link className="text-link" href="/#work"><span aria-hidden="true">←</span> Back to selected work</Link>
+    <header className="case-hero"><p className="eyebrow"><span>{project.platform === "web" ? "Web application" : "Mobile experience"}</span>{project.year} / {project.role}</p><h1>{project.name}<span className="brand-dot">.</span></h1><p className="project-tagline">{project.tagline}</p><ul className="project-tags">{project.stack.map(s => <li key={s}>{s}</li>)}</ul></header>
+    <p className="case-body">{project.body}</p>
+    {project.href && <div className="mt-7"><a className="button button-primary" href={project.href} target="_blank" rel="noreferrer">{project.published ? "View on Google Play" : "Visit project"}<Icon name="diagonal" size={18} /></a></div>}
+    {project.screenshots?.length > 0 && <section className="case-gallery" aria-label="Project screenshots"><ProjectGallery images={project.screenshots} projectName={project.name} variant={project.platform === "mobile" ? "mobile" : "grid"} /></section>}
+    {project.retro && <div className="mt-10 grid gap-8 border-t border-(--line) pt-8 sm:grid-cols-2">{[["What went well", project.retro.wentWell], ["What I’d change", project.retro.wouldChange]].map(([label, items]) => <section key={label}><h2 className="mb-4 font-medium">{label}</h2><ul className="space-y-3 text-sm leading-relaxed text-(--muted)">{items.map(item => <li key={item}>{item}</li>)}</ul></section>)}</div>}
+    <nav className="case-navigation" aria-label="More projects"><Link href={`/work/${slugify(prev.name)}`}><small>← Previous project</small><strong>{prev.name}</strong></Link><Link href={`/work/${slugify(next.name)}`}><small>Next project →</small><strong>{next.name}</strong></Link></nav>
+    <footer className="case-footer"><span>{profile.name}</span><Link className="text-link" href="/#contact">Let’s build together<Icon name="diagonal" size={16} /></Link></footer>
+  </article></main></>;
 }

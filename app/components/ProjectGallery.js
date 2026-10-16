@@ -3,9 +3,10 @@
 import { ConfigProvider, Image, theme } from "antd";
 
 export default function ProjectGallery({ images, projectName, variant = "side" }) {
-  const isGrid = variant === "grid";
+  const isPortrait = variant === "mobile";
+  const isGrid = variant === "grid" || isPortrait;
   const imgProps = isGrid
-    ? { width: "100%", height: "auto", style: { aspectRatio: "1.93", objectFit: "cover" } }
+    ? { width: "100%", height: "auto", style: { aspectRatio: isPortrait ? "9 / 20" : "1.93", objectFit: "contain", background: isPortrait ? "#101b1d" : "#fff" } }
     : { width: 150, height: 78, style: { objectFit: "cover" } };
 
   return (
@@ -13,7 +14,7 @@ export default function ProjectGallery({ images, projectName, variant = "side" }
       theme={{
         algorithm: theme.darkAlgorithm,
         token: {
-          colorPrimary: "#ff9a3d",
+          colorPrimary: "#b84c28",
           colorBgMask: "rgba(5, 6, 7, 0.86)",
           fontFamily: "var(--mono)",
         },
@@ -21,7 +22,9 @@ export default function ProjectGallery({ images, projectName, variant = "side" }
     >
       <div
         className={
-          isGrid
+          isPortrait
+            ? "mx-auto grid max-w-[680px] grid-cols-1 gap-6 sm:grid-cols-2"
+            : isGrid
             ? "grid grid-cols-1 gap-4 sm:grid-cols-2"
             : "flex flex-wrap gap-3"
         }
